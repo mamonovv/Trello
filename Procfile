@@ -1,0 +1,1 @@
+web: gunicorn Trell.wsgi --log-file -
