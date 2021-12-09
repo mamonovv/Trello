@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+p {
+  font-size: 1.55em;
+}
+
+body {
+  background-color: #f9fafc;
+  font-family: 'Montserrat', sans-serif;
+}
+
+header {
+  margin: 3em 0px;
+  display: flex;
+  justify-content: center;
+}
+h3 {
+  font-weight: 500;
+  color: #5e6c84;
+  font-size: 1em;
+}
+
+input {
+  width: 340px;
+  height: 40px;
+  margin-bottom: 1.5em;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  box-shadow: 0px 2px 5px lightgrey;
+  padding-left: 14px;
+}
+
+.logo {
+  width: 13em;
+}
+
+.sect {
+  display: flex;
+  justify-content: center;
+}
+.container {
+  margin: 0 20vw;
+  width: 400px;
+  height: 50vh;
+  background-color: white;
+  box-shadow: 0px 2px 10px lightgrey;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-item:first-child {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.container-item:last-child {
+  margin-top: 3em;
+}
+
+.container-item input {
+  margin-bottom: 1.3em;
+}
+
+.container-item input:last-child {
+  margin-bottom: 1.8em;
+}
+
+.reg {
+  color: #f9fafc;
+  background-color: #5aac44;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 5px;
+  text-align: center;
+  width: 340px;
+  height: 40px;
+  padding: 0.5em 0;
+}
+
+.reg:hover {
+  background-color: rgb(75, 201, 75);
+  transition: 0.3s background-color;
+}
+
+.arch {
+  color: #5083cf;
+  text-decoration: none;
+}
+
+.arch:hover {
+  text-decoration: underline;
+}

@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-ekfg0=e7m_m3d@e2a_i0d(f(8&*!nd)4jd#fk0bq@mmie16vzp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ALLOWED_HOSTS = ['trello-nstu.herokuapp.com', '127.0.0.1']
-]
+ALLOWED_HOSTS = ['trello-nstu.herokuapp.com', '127.0.0.1']
+
 
 
 # Application definition
