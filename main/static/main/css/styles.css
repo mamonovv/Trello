@@ -44,11 +44,22 @@ main {
   color: #0065ff;
 }
 
+.log:hover {
+  color: #6798e2;
+  text-decoration: underline;
+}
+
 .reg {
   color: #ece9ff;
   background-color: #0065ff;
   padding: 8px;
   border-radius: 5px;
+  border: 1px solid #0065ff;
+}
+
+.reg:hover {
+  background-color: #ece9ff;
+  color: #0065ff;
 }
 
 .header-item a:first-child {
