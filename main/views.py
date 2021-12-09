@@ -7,16 +7,21 @@ def index(request):
 
 
 def login(request):
-  return render(request, 'main/login.html')
+  context = {
+    'titlePage': 'Авторизация',
+    'titleCard': 'Войти в трелло',
+    'cardBtn': 'Войти',
+    'anotherLink': 'Регистрация',
+  }
+  return render(request, 'main/reg-log.html', context=context)
 
 
-# class RegisterUser(DataMixin, CreateView):
-#   form_class = UserCreationForm
-#   template_name = '/register.html'
-#   success_url = reverse_lazy('login')
+def register(request):
+  context = {
+    'titlePage': 'Регистрация',
+    'titleCard': 'Зарегистрироваться в трелло',
+    'cardBtn': 'Зарегистрироваться',
+    'anotherLink': 'Авторизация',
+  }
+  return render(request, 'main/reg-log.html', context=context)
 
-#   def get_context_data(self, *, object_list=None, **kwargs):
-#       context = super().get_context_data(**kwargs)
-#       c_def = self.get_user_context(title='Регистрация')
-#       return dict(list(context.items()) + list(c_def.items()))
-  

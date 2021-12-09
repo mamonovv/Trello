@@ -11,13 +11,20 @@
   </head>
   <body>
     <header>
-      <a href="#">
-        <img
-          src="{% static 'main/images/logo.png' %}"
-          alt="logo"
-          class="logo"
-        />
-      </a>
+      <div class="header-item">
+        <a href="#">
+          <img
+            src="{% static 'main/images/logo.png' %}"
+            alt="logo"
+            class="logo"
+          />
+        </a>
+      </div>
+
+      <div class="header-item">
+        <a class="log" href="#">Войти</a>
+        <a class="reg" href="#">Регистрация</a>
+      </div>
     </header>
 
     <main>

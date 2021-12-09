@@ -20,7 +20,9 @@ p {
 
 header {
   display: flex;
-  justify-self: start;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1em;
 }
 
 body {
@@ -30,6 +32,27 @@ body {
 
 main {
   margin: 0px 10vw;
+}
+
+.log,
+.reg {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.log {
+  color: #0065ff;
+}
+
+.reg {
+  color: #ece9ff;
+  background-color: #0065ff;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.header-item a:first-child {
+  margin-right: 1em;
 }
 
 .logo {

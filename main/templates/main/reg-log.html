@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ titlePage }}</title>
+    <link rel="stylesheet" href="{% static 'main/css/stylesBase.css' %}" />
+  </head>
+  <body>
+    <header>
+      <div class="header-item">
+        <a href="#">
+          <img
+            src="{% static 'main/images/logo.png' %}"
+            alt="logo"
+            class="logo"
+          />
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="sect">
+        <div class="container">
+          <div class="container-item">
+            <h3>{{titleCard}}</h3>
+          </div>
+          <div class="container-item">
+            <form action="">
+              <input
+                placeholder="Укажите адрес электронной почты"
+                type="text"
+                id="username"
+                name="username"
+              /><br />
+              <input
+                placeholder="Введите пароль"
+                type="password"
+                id="pwd"
+                name="pwd"
+              />
+            </form>
+          </div>
+          <div class="container-item">
+            <a class="reg" href="#">{{cardBtn}}</a>
+          </div>
+          <div class="container-item">
+            <a class="arch" href="#">{{anotherLink}}</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
