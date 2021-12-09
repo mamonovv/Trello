@@ -12,7 +12,7 @@
   <body>
     <header>
       <div class="header-item">
-        <a href="#">
+        <a href="{% url 'home' %}">
           <img
             src="{% static 'main/images/logo.png' %}"
             alt="logo"
@@ -44,11 +44,9 @@
               />
             </form>
           </div>
+          <a class="reg" href="#">{{cardBtn}}</a>
           <div class="container-item">
-            <a class="reg" href="#">{{cardBtn}}</a>
-          </div>
-          <div class="container-item">
-            <a class="arch" href="#">{{anotherLink}}</a>
+            <a class="arch" href="{% url url_anotherLink %}">{{anotherLink}}</a>
           </div>
         </div>
       </section>

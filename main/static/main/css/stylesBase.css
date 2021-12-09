@@ -66,14 +66,19 @@ input {
 
 .container-item:first-child {
   margin-top: 3em;
+  margin-bottom: 3em;
 }
 
 .container-item:last-child {
   margin-top: 3em;
 }
 
-.container-item {
-  margin-bottom: 2em;
+.container-item input {
+  margin-bottom: 1.3em;
+}
+
+.container-item input:last-child {
+  margin-bottom: 1.8em;
 }
 
 .reg {
@@ -83,7 +88,9 @@ input {
   font-weight: 700;
   border-radius: 5px;
   text-align: center;
-  padding: 0.5em 9em;
+  width: 340px;
+  height: 40px;
+  padding: 0.5em 0;
 }
 
 .reg:hover {

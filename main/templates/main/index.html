@@ -12,7 +12,7 @@
   <body>
     <header>
       <div class="header-item">
-        <a href="#">
+        <a href="{% url 'home %'}">
           <img
             src="{% static 'main/images/logo.png' %}"
             alt="logo"
@@ -22,8 +22,8 @@
       </div>
 
       <div class="header-item">
-        <a class="log" href="#">Войти</a>
-        <a class="reg" href="#">Регистрация</a>
+        <a class="log" href="{% url 'login' %}">Войти</a>
+        <a class="reg" href="{% url 'register' %}">Регистрация</a>
       </div>
     </header>
 
@@ -47,7 +47,9 @@
           </div>
         </div>
         <div class="container">
-          <a href="#" class="button"> Попробовать бесплатно! </a>
+          <a href="{% url 'register' %}" class="button">
+            Попробовать бесплатно!
+          </a>
         </div>
       </section>
 
@@ -136,7 +138,7 @@
             </h2>
           </div>
           <div class="container last">
-            <a href="#" class="button">Регистариця</a>
+            <a href="{% url 'register' %}" class="button">Регистариця</a>
           </div>
         </div>
       </section>
