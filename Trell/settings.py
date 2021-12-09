@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import django_heroku
 import os
 from pathlib import Path
 
@@ -25,7 +26,8 @@ SECRET_KEY = 'django-insecure-ekfg0=e7m_m3d@e2a_i0d(f(8&*!nd)4jd#fk0bq@mmie16vzp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [ALLOWED_HOSTS = ['trello-nstu.herokuapp.com', '127.0.0.1']
+]
 
 
 # Application definition
@@ -129,3 +131,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+django_heroku.settings(locals(), databases=False)
