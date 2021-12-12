@@ -1,0 +1,24 @@
+{% extends 'main/reg-log.html' %} {% block content %}
+
+<div class="container-item">
+  <form method="ppst">
+    {% csrf_token %} {% for f in form %}
+    <p>
+      <label class="form-label"">: </label
+      >{{ f }}
+    </p>
+    <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+
+    <!-- <input
+      placeholder="Укажите адрес электронной почты"
+      type="text"
+      id="username"
+      name="username"
+    /><br />
+    <input placeholder="Введите пароль" type="password" id="pwd" name="pwd" /> -->
+  </form>
+</div>
+<button type="submit" class="reg">{{cardBtn}}</button>
+
+{% endblock %}

@@ -33,7 +33,10 @@
           <div class="container-item">
             <h3>{{titleCard}}</h3>
           </div>
-          <div class="container-item">
+
+          {% block content %} {% endblock %}
+
+          <!-- <div class="container-item">
             <form action="">
               <input
                 placeholder="Укажите адрес электронной почты"
@@ -49,9 +52,9 @@
               />
             </form>
           </div>
-          <a class="reg" href="#">{{cardBtn}}</a>
+          <a class="reg" href="#">{{cardBtn}}</a> -->
           <div class="container-item">
-            <a class="arch" href="{% url url_anotherLink %}">{{anotherLink}}</a>
+            <a class="arch" href="">{{anotherLink}}</a>
           </div>
         </div>
       </section>
