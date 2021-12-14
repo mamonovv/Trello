@@ -2,10 +2,14 @@
 
 <div class="container-item">
   <form method="post" >
-    {% csrf_token %} {% for f in form %}
+    {% csrf_token %} 
+    
+    <div class="form-errors">{{form.non_field_errors}}</div>
+    
+    {% for f in form %}
     <p>{{f}}</p>
     
-    <div class="form-errors">{{ f.errors }}</div>
+    <div class="form-error">{{ f.errors }}</div>
     {% endfor %}
   <button type="submit" class="reg">{{cardBtn}}</button>
 
