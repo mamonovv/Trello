@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout, login
 
 
 from .forms import *
@@ -87,3 +88,7 @@ class LoginUser(LoginView):
 
   def get_success_url(self):
     return reverse_lazy('home')
+
+def logout_user(request):
+  logout(request)
+  return redirect('login')
