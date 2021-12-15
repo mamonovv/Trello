@@ -57,7 +57,7 @@
         </div>
         <div class="container">
           {% if request.user.is_authenticated %}
-          <a href="{% url 'home' %}" class="button">
+          <a href="{% url 'main' %}" class="button">
             Попробовать бесплатно!
           </a>
         {% else %}
@@ -154,7 +154,7 @@
           </div>
           <div class="container last">
             {% if request.user.is_authenticated %}
-            <a href="{% url 'home' %}" class="button">Регистариця</a>
+            <a href="{% url 'main' %}" class="button">Регистариця</a>
           </div>
         {% else %}
         <a href="{% url 'register' %}" class="button">Регистариця</a>
