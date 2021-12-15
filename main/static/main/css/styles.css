@@ -4,6 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 h1 {
@@ -42,6 +43,8 @@ main {
 
 .log {
   color: #0065ff;
+  margin-right: 1em;
+
 }
 
 .log:hover {
@@ -62,9 +65,18 @@ main {
   color: #0065ff;
 }
 
-.header-item a:first-child {
-  margin-right: 1em;
+.name {
+  text-decoration: none;
+  margin-right: 0;
+  color: grey;
+  font-weight: 500;
 }
+
+.name:hover {
+  text-decoration: underline;
+  color: #6798e2;
+}
+
 
 .logo {
   width: 10em;

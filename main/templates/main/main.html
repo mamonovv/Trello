@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main page - {{ request.user.username }}</title>
+  <link rel="stylesheet" href="{% static 'main/css/stylesMain.css' %}" />
+  <link
+      rel="shortcut icon"
+      href="{% static 'main/images/icon.ico' %}"
+      type="image/x-icon"
+    />
+</head>
+<body>
+  <header>
+    <div class="header-item">
+      <a href="{% url 'home' %}">
+        <img
+          src="{% static 'main/images/logo.png' %}"
+          alt="logo"
+          class="logo"
+        />
+      </a>
+    </div>
+
+    <div class="header-item">
+
+      <span class="name">{{ user.username }}</span> | <a class="log" href="{% url 'logout' %}">Выйти</a>
+      
+    </div>
+  </header>
+
+
+  <main>
+    <section>
+      <div class="container">
+        <div class="container-item">
+          <h1>Ваши доски:</h1>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
