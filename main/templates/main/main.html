@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Main page - {{ request.user.username }}</title>
+  <title>{{ request.user.username }}</title>
   <link rel="stylesheet" href="{% static 'main/css/stylesMain.css' %}" />
   <link
       rel="shortcut icon"
@@ -37,9 +37,46 @@
   <main>
     <section>
       <div class="container">
-        <div class="container-item">
+        <div class="container-title">
           <h1>Ваши доски:</h1>
         </div>
+        <div class="container-wrap">
+
+          <div class="wrap-outer">
+            <a href="#">
+              <div class="wrap-inner">
+                <h2>Title of board</h2>
+              </div>
+            </a>
+          </div>
+          <div class="wrap-outer">
+            <a href="#">
+              <div class="wrap-inner">
+                <h2>Title of board</h2>
+              </div>
+            </a>
+          </div>
+          <div class="wrap-outer">
+            <a href="#">
+              <div class="wrap-inner">
+                <h2>Title of board</h2>
+              </div>
+            </a>
+          </div>
+          <div class="wrap-outer">
+            <a href="#">
+              <div class="wrap-inner">
+                <h2>Title of board</h2>
+              </div>
+            </a>
+          </div>
+          <div class="wrap-outer">
+            <a href="#">
+              <div class="wrap-inner">
+                <h2>Title of board</h2>
+              </div>
+            </a>
+          </div>
       </div>
     </section>
   </main>

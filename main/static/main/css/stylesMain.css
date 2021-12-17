@@ -68,12 +68,46 @@ main {
 .container {
   display: flex;
   margin-bottom: 2em;
+  flex-direction: column;
 }
 
-.container-item {
+.container-title {
   flex: 0 1 auto;
+  margin-bottom: 3vh;
 }
 
-.container-item h1{
-  padding-left: 1em;
+.container-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 0 auto;
+}
+
+.wrap-outer {
+  height: 10rem;
+  width: 250px;
+  border-radius: 10px;
+  max-width: 30vw;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+
+.wrap-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #0065ff;
+  height: 10rem;
+  width: 250px;
+  max-width: 30vw;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.wrap-inner h2 {
+  font-size: 1.5em;
+}
+
+.container-wrap a {
+  text-decoration: none;
 }
