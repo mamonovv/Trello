@@ -83,29 +83,35 @@ main {
 }
 
 .wrap-outer {
+  width: 30vw;
+  max-width: 13rem;
   height: 10rem;
-  width: 250px;
   border-radius: 10px;
-  max-width: 30vw;
   margin-right: 2rem;
   margin-bottom: 2rem;
 }
 
 .wrap-inner {
   display: flex;
+  width: 30vw;
+  max-width: 13rem;
+  height: 10rem;
   align-items: center;
   justify-content: center;
   text-align: center;
   background-color: #0065ff;
-  height: 10rem;
-  width: 250px;
-  max-width: 30vw;
   border-radius: 10px;
   padding: 1em;
 }
 
+.wrap-inner:hover {
+  background-color: #6798e2;
+  transition: 0.2s background-color;
+}
+
 .wrap-inner h2 {
   font-size: 1.5em;
+  color: #ece9ff;
 }
 
 .container-wrap a {
