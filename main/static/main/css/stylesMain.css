@@ -72,7 +72,8 @@ main {
 }
 
 .container-title {
-  flex: 0 1 auto;
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 3vh;
 }
 
@@ -117,3 +118,39 @@ main {
 .container-wrap a {
   text-decoration: none;
 }
+
+.reg {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.reg {
+  color: #ece9ff;
+  background-color: #00c3ff;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #00c3ff;
+}
+
+.reg:hover {
+  background-color: #ece9ff;
+  color: #0065ff;
+}
+
+.button {
+  background-color: #0065ff;
+  padding: 1em;
+  color: #ece9ff;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  width: 20vw;
+  max-width: 170px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.button:hover {
+  background-color: #2461bd;
+}
+

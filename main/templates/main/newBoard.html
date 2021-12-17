@@ -1,0 +1,18 @@
+{% extends 'main/base.html'%}
+
+{% block content %}
+
+
+<div class="container-item">
+  <form method="post" >
+    {% csrf_token %} {% for f in form %}
+    <p>{{f}}</p>
+    
+    <div class="form-errors">{{ f.errors }}</div>
+    {% endfor %}
+  <button type="submit" class="reg">{{cardBtn}}</button>
+
+  </form>
+</div>
+
+{% endblock %}

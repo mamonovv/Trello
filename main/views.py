@@ -20,38 +20,6 @@ pages = [
 def index(request):
   return render(request, 'main/index.html')
 
-
-# def login(request):
-#   context = {
-#     'titlePage': 'Авторизация',
-#     'titleCard': 'Войти в трелло',
-#     'cardBtn': 'Войти',
-#     'anotherLink': 'Регистрация',
-#     'url_anotherLink': 'register',
-#   }
-#   return render(request, 'main/reg-log.html', context=context)
-
-# def register(request):
-#   if request.method == 'POST':
-#     form = RegisterUserForm(request.POST)
-#     if form.is_valid():
-#       form.save()
-#       return redirect('login')
-#   else:
-#     form = RegisterUserForm()
-
-#   context = {
-#     'titlePage': 'Регистрация',
-#     'titleCard': 'Зарегистрироваться в трелло',
-#     'cardBtn': 'Зарегистрироваться',
-#     'anotherLink': 'Авторизация',
-#     'url_anotherLink': 'login',
-#     'form': form
-#   }
-
-#   return render(request, 'main/register.html', context=context)
-
-
 class RegisterUser(CreateView):
   form_class = RegisterUserForm
   template_name = 'main/register.html'
@@ -95,14 +63,21 @@ class LoginUser(LoginView):
     return reverse_lazy('main')
 
 
-
 def logout_user(request):
   logout(request)
   return redirect('login')
 
 
-def main_user(request, user_id):
-  return HttpResponse(f"Отображение пользователя с id = {user_id}")
-
 def main_page(request):
   return render(request, 'main/main.html')
+
+
+def new_board(request):
+  if request.method == 'POST':
+    form = AddBoardForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('main')
+  else:
+    form = AddBoardForm()
+  return render(request, 'main/newBoard.html', {'form': form})

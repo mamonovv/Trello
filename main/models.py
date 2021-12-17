@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser
 
 class Boards(models.Model):
   name = models.CharField(max_length = 255, verbose_name="Название доски")
-  slug = models.SlugField(max_length = 255, unique=True, db_index = True, verbose_name="URL", default=1 )
   # user_id = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
 
   def __str__(self):
@@ -35,7 +34,7 @@ class Card(models.Model):
   photo = models.ImageField(upload_to = "photos/", verbose_name="Фото")
   column = models.ForeignKey(Column, on_delete=models.CASCADE, verbose_name="Название колонки")
   board = models.ForeignKey(Boards, on_delete=models.CASCADE, null=True, verbose_name="Название доски")
-  slug = models.SlugField(max_length = 255, unique=True, db_index = True, verbose_name="URL" )
+
 
   def __str__(self):
       return self.name

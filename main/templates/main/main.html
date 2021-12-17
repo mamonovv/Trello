@@ -1,84 +1,54 @@
-{% load static %}
+{% extends 'main/base.html'%}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ request.user.username }}</title>
-  <link rel="stylesheet" href="{% static 'main/css/stylesMain.css' %}" />
-  <link
-      rel="shortcut icon"
-      href="{% static 'main/images/icon.ico' %}"
-      type="image/x-icon"
-    />
-</head>
-<body>
-  <header>
-    <div class="header-item">
-      <a href="{% url 'home' %}">
-        <img
-          src="{% static 'main/images/logo.png' %}"
-          alt="logo"
-          class="logo"
-        />
-      </a>
-    </div>
+{% block content %}
 
-    <div class="header-item">
-
-      <span class="name">{{ user.username }}</span> | <a class="log" href="{% url 'logout' %}">Выйти</a>
-      
-    </div>
-  </header>
-
-
-  <main>
-    <section>
-      <div class="container">
-        <div class="container-title">
-          <h1>Ваши доски:</h1>
-        </div>
-        <div class="container-wrap">
-
-          <div class="wrap-outer">
-            <a href="#">
-              <div class="wrap-inner">
-                <h2>Title of board</h2>
-              </div>
-            </a>
-          </div>
-          <div class="wrap-outer">
-            <a href="#">
-              <div class="wrap-inner">
-                <h2>Title of board</h2>
-              </div>
-            </a>
-          </div>
-          <div class="wrap-outer">
-            <a href="#">
-              <div class="wrap-inner">
-                <h2>Title of board</h2>
-              </div>
-            </a>
-          </div>
-          <div class="wrap-outer">
-            <a href="#">
-              <div class="wrap-inner">
-                <h2>Title of board</h2>
-              </div>
-            </a>
-          </div>
-          <div class="wrap-outer">
-            <a href="#">
-              <div class="wrap-inner">
-                <h2>Title of board</h2>
-              </div>
-            </a>
-          </div>
+<main>
+  <section>
+    <div class="container">
+      <div class="container-title">
+        <h1>Ваши доски:</h1>
+          <a class="button" href="{% url 'new_board' %}">Создать доску</a>
+        
       </div>
-    </section>
-  </main>
-</body>
-</html>
+      <div class="container-wrap">
+
+        <div class="wrap-outer">
+          <a href="#">
+            <div class="wrap-inner">
+              <h2>Title of board</h2>
+            </div>
+          </a>
+        </div>
+        <div class="wrap-outer">
+          <a href="#">
+            <div class="wrap-inner">
+              <h2>Title of board</h2>
+            </div>
+          </a>
+        </div>
+        <div class="wrap-outer">
+          <a href="#">
+            <div class="wrap-inner">
+              <h2>Title of board</h2>
+            </div>
+          </a>
+        </div>
+        <div class="wrap-outer">
+          <a href="#">
+            <div class="wrap-inner">
+              <h2>Title of board</h2>
+            </div>
+          </a>
+        </div>
+        <div class="wrap-outer">
+          <a href="#">
+            <div class="wrap-inner">
+              <h2>Title of board</h2>
+            </div>
+          </a>
+        </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}
