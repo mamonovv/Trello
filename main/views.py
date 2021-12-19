@@ -92,4 +92,5 @@ def new_board(request):
   return render(request, 'main/newBoard.html', context=context)
 
 def show_board(request, board_id):
-  return render(request, 'main/board.html')
+  board = Board.objects.get(pk=board_id)
+  return render(request, 'main/board.html', {'board': board})
