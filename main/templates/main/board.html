@@ -1,5 +1,60 @@
-{% extends 'main/base.html'%}
+{% load static %}
 
-{% block content %}
 
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ request.user.username }}</title>
+  <link rel="stylesheet" href="{% static 'main/css/stylesBoards.css' %}" />
+  <link
+      rel="shortcut icon"
+      href="{% static 'main/images/icon.ico' %}"
+      type="image/x-icon"
+    />
+</head>
+<body>
+  <header>
+    <div class="header-item">
+      <a href="{% url 'home' %}">
+        <img
+          src="{% static 'main/images/logo.png' %}"
+          alt="logo"
+          class="logo"
+        />
+      </a>
+    </div>
+
+    <div class="header-item">
+      <a class="name" href="{% url 'main' %}">{{ user.username }}</a> | <a class="log" href="{% url 'logout' %}">Выйти</a>
+    </div>
+  </header>
+  <div class="app">
+    <div class="columns">
+      <div class="columns__item">
+        <span contenteditable="true" class="title">Введите название</span>
+        <div class="list">
+          <div class="list__item" draggable="true">
+            Стартовая карточка
+          </div>
+
+          <div class="form">
+            <textarea class="textarea" placeholder="Введите название для карточки"></textarea>
+            <div class="buttons">
+              <button class="add__item-btn">Добавить карточку</button>
+              <button class="cancel-btn">Отмена</button>
+            </div>
+          </div>
+
+          <div class="add__btn"><span> + </span> Добавить карточку</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>
+
+
+  
