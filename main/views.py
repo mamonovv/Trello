@@ -80,7 +80,7 @@ def new_board(request):
       board = form.save(commit=False)
       board.user = request.user
       board.save()
-      return redirect('main')
+      return redirect('board', board.pk)
   else:
     form = AddBoardForm()
 
@@ -92,4 +92,4 @@ def new_board(request):
   return render(request, 'main/newBoard.html', context=context)
 
 def show_board(request, board_id):
-  return HttpResponse(f"Доска - {board_id}")
+  return render(request, 'main/board.html')

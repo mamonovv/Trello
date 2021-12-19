@@ -28,9 +28,11 @@
     </div>
 
     <div class="header-item">
-
+      {% if  request.path == '/main/'%}
       <span class="name">{{ user.username }}</span> | <a class="log" href="{% url 'logout' %}">Выйти</a>
-      
+      {% else %}
+      <a class="name" href="{% url 'main' %}">{{ user.username }}</a> | <a class="log" href="{% url 'logout' %}">Выйти</a>
+      {% endif %}
     </div>
   </header>
     {% block content %}
