@@ -69,15 +69,27 @@ def logout_user(request):
 
 
 def main_page(request):
-  return render(request, 'main/main.html')
+  boards = Board.objects.all()
+  return render(request, 'main/main.html', {'boards': boards,})
 
 
 def new_board(request):
   if request.method == 'POST':
     form = AddBoardForm(request.POST)
     if form.is_valid():
-      form.save()
+      board = form.save(commit=False)
+      board.user = request.user
+      board.save()
       return redirect('main')
   else:
     form = AddBoardForm()
-  return render(request, 'main/newBoard.html', {'form': form})
+
+  context = {
+    'form': form, 
+    'cardBtn': 'Создать доску'
+  }
+  # return render(request, 'main/newBoard.html', context=context)
+  return render(request, 'main/newBoard.html', context=context)
+
+def show_board(request, board_id):
+  return HttpResponse(f"Доска - {board_id}")

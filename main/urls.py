@@ -10,6 +10,7 @@ urlpatterns = [
     path('register/', RegisterUser.as_view(), name = 'register'),
     path('main/', main_page, name = 'main'),
     path('main/new_board/', new_board, name='new_board'),
+    path('main/board/<int:board_id>/', show_board, name='board'),
 ]
 
 if settings.DEBUG:

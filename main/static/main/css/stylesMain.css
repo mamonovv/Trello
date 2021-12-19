@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
 
+::-webkit-input-placeholder {font-size: 20px;}
+::-moz-placeholder {font-size: 20px;}
+:-ms-input-placeholder {font-size: 20px;}
+:-moz-placeholder {font-size: 20px;}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -75,6 +80,7 @@ main {
   display: flex;
   justify-content: space-between;
   margin-bottom: 3vh;
+  text-align: center;
 }
 
 .container-wrap {
@@ -119,24 +125,6 @@ main {
   text-decoration: none;
 }
 
-.reg {
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.reg {
-  color: #ece9ff;
-  background-color: #00c3ff;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #00c3ff;
-}
-
-.reg:hover {
-  background-color: #ece9ff;
-  color: #0065ff;
-}
-
 .button {
   background-color: #0065ff;
   padding: 1em;
@@ -154,3 +142,54 @@ main {
   background-color: #2461bd;
 }
 
+.form-errors {
+  margin: 0.5em;
+  margin-left: 2.5em;
+}
+
+.input-form {
+  width: 80vw; 
+  max-width: 500px;
+  height: 80px;
+  margin-bottom: 1.5em;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  box-shadow: 0px 2px 5px lightgrey;
+  padding-left: 14px;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.reg {
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 5px;
+
+  color: #f9fafc;
+  background-color: #5aac44;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 5px;
+  text-align: center;
+  width: 80vw; 
+  max-width: 500px;
+  height: 60px;
+  padding: 0.5em 0;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.reg:hover {
+  background-color: rgb(75, 201, 75);
+  transition: 0.3s background-color;
+  
+}
+
+.container-item {
+  display: flex;
+  justify-content: center;
+}
+
+.center {
+  justify-content: center;
+}

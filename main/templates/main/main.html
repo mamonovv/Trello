@@ -12,41 +12,21 @@
       </div>
       <div class="container-wrap">
 
+        {% for b in boards %}
+
+        {% if b.user == request.user %}
         <div class="wrap-outer">
-          <a href="#">
+          <a href="{{ b.get_absolute_url }}">
             <div class="wrap-inner">
-              <h2>Title of board</h2>
+              <h2>{{b.name}}</h2>
             </div>
           </a>
         </div>
-        <div class="wrap-outer">
-          <a href="#">
-            <div class="wrap-inner">
-              <h2>Title of board</h2>
-            </div>
-          </a>
-        </div>
-        <div class="wrap-outer">
-          <a href="#">
-            <div class="wrap-inner">
-              <h2>Title of board</h2>
-            </div>
-          </a>
-        </div>
-        <div class="wrap-outer">
-          <a href="#">
-            <div class="wrap-inner">
-              <h2>Title of board</h2>
-            </div>
-          </a>
-        </div>
-        <div class="wrap-outer">
-          <a href="#">
-            <div class="wrap-inner">
-              <h2>Title of board</h2>
-            </div>
-          </a>
-        </div>
+        {% endif %}
+
+        {% endfor %}
+        
+        
     </div>
   </section>
 </main>

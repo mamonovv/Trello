@@ -8,9 +8,14 @@ from .models import *
 
 
 class AddBoardForm(forms.ModelForm):
+  name = forms.CharField(widget=forms.TextInput(attrs={'class': 'input-form', 'placeholder': "Название доски доски"}))
+
   class Meta:
-    model = Boards
-    fields = '__all__'
+    model = Board
+    fields = ['name',]
+  
+
+  
 
 
 class AddColumnForm(forms.ModelForm):

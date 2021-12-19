@@ -5,10 +5,15 @@ from django.contrib.auth.admin import UserAdmin
 from .models import *
 
 
-class BoardsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-    list_display_links = ('id', 'name')
-    search_fields = ('name', )
+class BoardAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'user')
+    list_display_links = ('id', 'name', 'user')
+    search_fields = ('name', 'user',)
+
+    # def save_model(self, request, obj, form, change):
+    #     if getattr(obj, 'user', None) is None:
+    #         obj.user = request.user
+    #     obj.save()
 
 
 class ColumnAdmin(admin.ModelAdmin):
@@ -16,13 +21,18 @@ class ColumnAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name', 'board')
     search_fields = ('name', 'board')
 
+    # def save_model(self, request, obj, form, change):
+    #     if getattr(obj, 'board', None) is None:
+    #         obj.board = Board.objects.get(request.user.pk).pk
+    #     obj.save()
+
 
 class CardAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'content', 'deadline', 'photo', 'column', 'board')
-    list_display_links = ( 'name', 'deadline', 'column', 'board')
-    search_fields = ('name', 'board')
+    list_display = ('id', 'name', 'content', 'deadline', 'photo', 'column')
+    list_display_links = ( 'name', 'deadline', 'column')
+    search_fields = ('name', 'column')
 
-admin.site.register(Boards, BoardsAdmin)
+admin.site.register(Board, BoardAdmin)
 admin.site.register(Column, ColumnAdmin)
 admin.site.register(Card, CardAdmin)
 
