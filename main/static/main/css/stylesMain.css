@@ -10,6 +10,8 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
+  font-family: 'Montserrat', sans-serif;
+
 }
 
 h1 {
@@ -34,7 +36,6 @@ header {
 
 body {
   background-color: #ece9ff;
-  font-family: 'Montserrat', sans-serif;
 }
 
 main {
@@ -205,56 +206,4 @@ main {
 a.name:hover {
   text-decoration: underline;
   color: #6798e2;
-}
-
-/* Тут пошли стили для boards */
-
-.app {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 88.5vh;
-  padding: 50px 0;
-}
-
-.columns {
-  display: flex;
-  width: 100%;
-}
-
-.columns__item {
-  display: flex;
-  flex-direction: column;
-  align-self: baseline;
-  max-width: 250px;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  margin: 0 15px;
-  padding: 10px;
-  transition: .3s all ease;
-  border-radius: 3px;
-}
-
-.columns__item .title {
-  padding: 5px;
-}
-
-.columns__item .title:focus {
-  outline: 1px solid rgba(168, 168 , 168, .45);
-}
-
-.list {
-  min-height: 40px;
-}
-
-.list__item {
-  background-color: #fefefe;
-  border-radius: 3px;
-  text-align: center;
-  margin: 4px 0;
-  cursor: pointer;
-  font-size: 14px;
-  outline: auto;
-  border: none;
-  min-height: 40px;
 }

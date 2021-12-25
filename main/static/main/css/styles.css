@@ -5,6 +5,8 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
+  font-family: 'Montserrat', sans-serif;
+
 }
 
 h1 {
@@ -28,7 +30,6 @@ header {
 
 body {
   background-color: #ece9ff;
-  font-family: 'Montserrat', sans-serif;
 }
 
 main {

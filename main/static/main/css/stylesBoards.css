@@ -5,6 +5,8 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
+  font-family: 'Montserrat', sans-serif;
+
 }
 
 h1 {
@@ -29,7 +31,6 @@ header {
 
 body {
   background-color: #ece9ff;
-  font-family: 'Montserrat', sans-serif;
 }
 
 main {
@@ -170,12 +171,12 @@ a.name:hover {
   padding: 50px 0;
 }
 
-.columns {
+.boards {
   display: flex;
   width: 100%;
 }
 
-.columns__item {
+.boards__item {
   display: flex;
   flex-direction: column;
   align-self: baseline;
@@ -188,11 +189,13 @@ a.name:hover {
   border-radius: 3px;
 }
 
-.columns__item .title {
+.title {
   padding: 5px;
+  color: white;
+  font-weight: 500;
 }
 
-.columns__item .title:focus {
+.title:focus {
   outline: 1px solid rgba(168, 168 , 168, .45);
 }
 
@@ -203,11 +206,104 @@ a.name:hover {
 .list__item {
   background-color: #fefefe;
   border-radius: 3px;
+  padding: 10px;
   text-align: center;
   margin: 4px 0;
   cursor: pointer;
   font-size: 14px;
   outline: auto;
   border: none;
-  min-height: 40px;
+  font-weight: 500;
+}
+
+.form {
+  border-radius: 3px;
+  margin-top: auto;
+  display: none;
+}
+
+.textarea {
+  resize: none;
+  height: 60px;
+  border-radius: 3px;
+  border: none;
+  background: white;
+  padding: 10px;
+  width: 100%;
+}
+
+.textarea:focus {
+  outline: none;
+}
+
+.buttons {
+  display: flex;
+}
+
+.add__item-btn {
+  background: rgb(13, 136, 218);
+  border: none;
+  height: 35px;
+  cursor: pointer;
+  color: white;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.cancel__item-btn {
+  padding: 0 10px;
+  background: rgb(160, 17, 12);
+  border: none;
+  height: 35px;
+  cursor: pointer;
+  color: white;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.add__btn {
+  height: 30px;
+  background: rgba(155, 155, 155, 0.3);
+  border-radius: 3px;
+  margin-top: 5px;
+  display: flex;
+  font-style: 12px;
+  align-items: center;
+  padding-left: 10px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.add__btn span  {
+  font-size: 20px;
+  margin-right: 10px;
+  color: white;
+}
+
+.button {
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(19, 130, 204, .62);
+  border: none;
+  cursor: pointer;
+  width: 150px;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%);
+  color: white;
+  border-radius: 3px;
+  font-size: 14px;
 }
