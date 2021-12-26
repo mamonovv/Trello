@@ -1,6 +1,6 @@
 {% load static %}
 
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -32,11 +32,19 @@
   </header>
 
   <div class="app">
-    <div class="boards">
+    <div class="add__board">
+      <input placeholder="Введите название ..." class="add__board-input "type="text" id="add__board-input">
       <div class="button">Добавить доску</div>
-
+    </div>
+    <div class="boards">
+      
       <div class="boards__item">
-        <span contenteditable="true" class="title">Введите название</span>
+        <input type="text" class="title" placeholder="Введите название">
+
+        <div class="add__card">
+          <input placeholder="Карточка ..." class="add__board-input"type="text">
+          <div class="add__btn"><span> + </span></div>
+        </div>
 
         <div class="list">
           <div class="list__item" draggable="true">
@@ -44,25 +52,16 @@
           </div>
         </div>
 
-        <div class="form">
-          <textarea class="textarea" placeholder="Введите название для карточки"></textarea>
-          <div class="buttons">
-            <button class="add__item-btn">Добавить карточку</button>
-            <button class="cancel__item-btn">Отмена</button>
-          </div>
-        </div>
-
-        <div class="add__btn"><span> + </span> Добавить карточку</div>
       </div>
     </div>
   </div>
 
 
-  <script type="text/javascript" src={% static "main/js/main2.js" %}></script>
+  <script type="text/javascript" src={% static "main/js/main.js" %}></script>
   </body>
-</html> -->
+</html>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
@@ -104,4 +103,4 @@
     <div id="root"></div>
   </body>
   <script type="text/javascript" src={% static "main/js/main2.js" %}></script>
-</html>
+</html> -->

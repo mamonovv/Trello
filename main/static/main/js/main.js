@@ -1,92 +1,60 @@
 const button = document.querySelector('.button')
+const lists = document.querySelectorAll('.list')
+
 let draggedItem = null
 
-
 function addTask() {
-  const lists = document.querySelectorAll('.list')
-  const btn = document.querySelector('.add__btn')
-  const addBtn = document.querySelector('.add__item-btn')
-  const cancelBtn = document.querySelector('.cancel__item-btn')
-  const textarea = document.querySelector('.textarea')
-  const form = document.querySelector('.form')
+const addBtns = document.querySelectorAll('.add__btn')
+const inputCards = document.querySelectorAll('.add__board-input')
 
-  function clear() {
-    textarea.value = ''
-    value = ''
-    form.style.display = 'none'
-    btn.style.display = 'flex'
-  }
 
-  let value
-
-  btn.addEventListener('click', () => {
-    form.style.display = 'block'
-    btn.style.display = 'none'
-    addBtn.style.display = 'none'
-
-    textarea.addEventListener('input', e => {
-      value = e.target.value
+  inputCards.forEach(input => {
+    input.addEventListener('input', () => {
+      parent = input.parentNode.parentNode
+      addBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (input.value != '') {
+            const newCard = document.createElement('div')
+            newCard.classList.add('list__item')
+            newCard.draggable = true
+            newCard.textContent = input.value
+            input.value = ''
       
-      if (value) {
-        addBtn.style.display = 'block'
-      } else {
-        addBtn.style.display = 'none'
-      }
-
+            parent.append(newCard)
+            dragNdrop()
+          }
+        })
+      })
     })
   })
 
-  cancelBtn.addEventListener('click', () => {
-    clear()
-  })
-
-  addBtn.addEventListener('click', () => {
-    const newItem = document.createElement('div')
-    newItem.classList.add('list__item')
-    newItem.draggable = true
-    newItem.textContent = value
-    lists[0].append(newItem)
-
-    clear()
-    dragNdrop()
-  })
+  
 }
-
 
 function addBoard() {
+  const input = document.getElementById('add__board-input')
   const boards = document.querySelector('.boards')
-  const board = document.createElement('div')
-  board.classList.add('boards__item')
-  board.innerHTML = `
-    <span contenteditable="true" class="title">Введите название</span>
-    <div class="list"></div>
 
-    <div class="form">
-      <textarea class="textarea" placeholder="Введите название для карточки"></textarea>
-      <div class="buttons">
-        <button class="add__item-btn">Добавить карточку</button>
-        <button class="cancel__item-btn">Отмена</button>
+  if (input.value != '') {
+    const board = document.createElement('div')
+    board.classList.add('boards__item')
+    board.innerHTML = `
+      <input type="text" class="title" value="${input.value}">
+
+      <div class="add__card">
+        <input placeholder="Карточка ..." class="add__board-input"type="text">
+        <div class="add__btn"><span> + </span></div>
       </div>
-    </div>
 
-    <div class="add__btn"><span> + </span> Добавить карточку</div>
+      <div class="list"></div>
   `
-  boards.append(board)
+    input.value = ''
+    boards.append(board)
+  }
 
   addTask()
-  changeTitle()
   dragNdrop()
 }
-
-
-function changeTitle() {
-  const titles = document.querySelectorAll('.title')
-
-  titles.forEach( title => {
-    title.addEventListener('click', e => e.target.textContent = '')
-  })
-}
-
 
 function dragNdrop() {
   const listItems = document.querySelectorAll('.list__item')
@@ -116,18 +84,18 @@ function dragNdrop() {
     for (let j = 0; j < lists.length; j++) {
       const list = lists[j]
 
-      list.addEventListener('dragover', e => e.preventDefault())
+      list.addEventListener('dragover', (e) => e.preventDefault())
 
-      list.addEventListener('dragenter', function(e) {
+      list.addEventListener('dragenter', function (e) {
         e.preventDefault()
         this.style.backgroundColor = 'rgba(0,0,0,.3)'
       })
 
-      list.addEventListener('dragleave', function(e) {
+      list.addEventListener('dragleave', function (e) {
         this.style.backgroundColor = 'rgba(0,0,0,0)'
       })
 
-      list.addEventListener('drop', function(e) {
+      list.addEventListener('drop', function (e) {
         this.style.backgroundColor = 'rgba(0,0,0,0)'
         this.append(draggedItem)
       })
@@ -135,7 +103,6 @@ function dragNdrop() {
   }
 }
 
-
 button.addEventListener('click', addBoard)
-changeTitle()
+addTask()
 dragNdrop()

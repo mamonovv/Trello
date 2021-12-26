@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
 
-input::-webkit-input-placeholder { color: white; }
+input::-webkit-input-placeholder { color: black; }
 
 * {
   box-sizing: border-box;
@@ -165,6 +165,173 @@ a.name:hover {
 
 /* Тут пошли стили для boards */
 
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 88.5vh;
+  padding-bottom: 50px;
+}
+
+.boards {
+  display: flex;
+  width: 100%;
+}
+
+.boards__item {
+  display: flex;
+  flex-direction: column;
+  align-self: baseline;
+  max-width: 250px;
+  width: 100%;
+  background-color: rgb(189,206,255);
+  margin: 0 15px;
+  padding: 10px;
+  transition: .3s all ease;
+  border-radius: 3px;
+}
+
+.title {
+  background: none;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  padding: 5px;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+}
+
+.title:focus {
+  outline: 1px solid rgba(92, 87, 87, 0.45);
+}
+
+
+.list__item {
+  background-color: #fefefe;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: center;
+  margin: 0.5em 0;
+  cursor: pointer;
+  font-size: 14px;
+  outline: auto;
+  border: none;
+  font-weight: 500;
+  outline: none;
+}
+
+.form {
+  border-radius: 3px;
+  margin-top: auto;
+  display: none;
+}
+
+.textarea {
+  resize: none;
+  height: 60px;
+  border-radius: 3px;
+  border: none;
+  background: white;
+  padding: 10px;
+  width: 100%;
+}
+
+.textarea:focus {
+  outline: none;
+}
+
+.buttons {
+  display: flex;
+}
+
+.add__item-btn {
+  background: rgb(13, 136, 218);
+  border: none;
+  height: 35px;
+  cursor: pointer;
+  color: white;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.cancel__item-btn {
+  padding: 0 10px;
+  background: rgb(160, 17, 12);
+  border: none;
+  height: 35px;
+  cursor: pointer;
+  color: white;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.add__btn {
+  height: 30px;
+  background: rgba(155, 155, 155, 0.3);
+  border-radius: 3px;
+  display: flex;
+  font-style: 12px;
+  align-items: center;
+  padding-left: 10px;
+  color: black;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 0.2em;
+}
+
+.add__btn span  {
+  font-size: 20px;
+  margin-right: 10px;
+  color: black;
+}
+
+.button {
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #5aac44;
+  border: none;
+  cursor: pointer;
+  width: 150px;
+  color: white;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 0 15px;
+}
+
+.add__board {
+  display: flex;
+  margin-left: 1em;
+  margin-bottom: 1em;
+}
+
+.add__board-input {
+  border: none;
+  border-radius: 5px;
+  padding-left: 10px;
+  outline: none;
+  min-height: 35px;
+}
+
+.add__card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* Вариант с классами ------------------------------------------------*/
 
 #addTodoListDiv{
   margin-left: 2em;
@@ -188,7 +355,7 @@ a.name:hover {
   /*border: 1px solid red;*/
   border-radius: 4px;
   min-height: 100px;
-  background: rgba(0,101,255, 0.2);
+  background: rgba(0,101,255, 0.5);
   padding: 0.7em;
   margin: 1em 0 1em 1em;
 
