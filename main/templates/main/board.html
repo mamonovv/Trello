@@ -1,7 +1,6 @@
 {% load static %}
 
-
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,7 +33,9 @@
 
   <div class="app">
     <div class="boards">
-      <!-- <div class="boards__item">
+      <div class="button">Добавить доску</div>
+
+      <div class="boards__item">
         <span contenteditable="true" class="title">Введите название</span>
 
         <div class="list">
@@ -52,16 +53,55 @@
         </div>
 
         <div class="add__btn"><span> + </span> Добавить карточку</div>
-      </div> -->
+      </div>
     </div>
-
-    <div class="button">Добавить доску</div>
   </div>
 
 
-  <script type="text/javascript" src={% static "main/js/main.js" %}></script>
+  <script type="text/javascript" src={% static "main/js/main2.js" %}></script>
   </body>
-</html>
+</html> -->
 
-
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ board }}</title>
+    <link rel="stylesheet" href="{% static 'main/css/stylesBoards.css' %}" />
+    <link
+      rel="shortcut icon"
+      href="{% static 'main/images/icon.ico' %}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-item">
+        <a href="{% url 'home' %}">
+          <img
+            src="{% static 'main/images/logo.png' %}"
+            alt="logo"
+            class="logo"
+          />
+        </a>
+      </div>
   
+      <div class="header-item">
+        <a class="name" href="{% url 'main' %}">{{ user.username }}</a> | <a class="log" href="{% url 'logout' %}">Выйти</a>
+      </div>
+    </header>
+
+
+    <div id="addTodoListDiv">
+      <input id="addTodoListInput" class="comment" />
+      <button id="addTodoListButton" class="btn-save">
+        Add new to-do list
+      </button>
+    </div>
+
+    <div id="root"></div>
+  </body>
+  <script type="text/javascript" src={% static "main/js/main2.js" %}></script>
+</html>
