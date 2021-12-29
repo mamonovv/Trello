@@ -1,16 +1,15 @@
 const button = document.querySelector('.button')
-const lists = document.querySelectorAll('.list')
 
 let draggedItem = null
 
 function addTask() {
-const addBtns = document.querySelectorAll('.add__btn')
-const inputCards = document.querySelectorAll('.add__board-input')
+  const addBtns = document.querySelectorAll('.add__btn')
+  const inputCards = document.querySelectorAll('.add__board-input')
 
 
   inputCards.forEach(input => {
     input.addEventListener('input', () => {
-      parent = input.parentNode.parentNode
+      parent = input.parentNode.parentNode.querySelector('.list')
       addBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           if (input.value != '') {
@@ -50,10 +49,11 @@ function addBoard() {
   `
     input.value = ''
     boards.append(board)
+    addTask()
+    dragNdrop()
   }
 
-  addTask()
-  dragNdrop()
+  
 }
 
 function dragNdrop() {
@@ -84,24 +84,47 @@ function dragNdrop() {
     for (let j = 0; j < lists.length; j++) {
       const list = lists[j]
 
-      list.addEventListener('dragover', (e) => e.preventDefault())
 
-      list.addEventListener('dragenter', function (e) {
+      list.addEventListener('dragover', function(e) {
         e.preventDefault()
-        this.style.backgroundColor = 'rgba(0,0,0,.3)'
+      } )
+
+      list.addEventListener('dragenter', function(e) {
+        e.preventDefault()
+        // this.style.backgroundColor = 'rgba(0,0,0,.3)'
       })
 
-      list.addEventListener('dragleave', function (e) {
-        this.style.backgroundColor = 'rgba(0,0,0,0)'
-      })
+      // list.addEventListener('dragleave', function(e) {
+      //   this.style.backgroundColor = 'rgba(0,0,0,0)'
+      // })
 
-      list.addEventListener('drop', function (e) {
-        this.style.backgroundColor = 'rgba(0,0,0,0)'
-        this.append(draggedItem)
+      list.addEventListener('drop', function(e) {
+        // this.style.backgroundColor = 'rgba(0,0,0,0)'
+        this.appendChild(draggedItem)
+
       })
     }
   }
 }
+
+// function dragNdrop() {
+//   listItems = document.querySelectorAll('.list__item')
+//   lists = document.querySelectorAll('.list')
+
+//   listItems.forEach( item => {
+//     draggedItem = item
+
+//     item.addEventListener('dragstart', e => {
+//       console.log('start')
+//     })
+
+//     item.addEventListener('dragend', e => {
+//       console.log('end')
+
+//     })
+
+//   })
+// }
 
 button.addEventListener('click', addBoard)
 addTask()

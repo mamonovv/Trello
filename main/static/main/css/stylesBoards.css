@@ -47,7 +47,10 @@ main {
   font-weight: 500;
 }
 
-.log {
+
+
+.log,
+.reg {
   text-decoration: none;
   font-weight: 700;
 }
@@ -61,6 +64,19 @@ main {
 .log:hover {
   color: #6798e2;
   text-decoration: underline;
+}
+
+.reg {
+  color: #ece9ff;
+  background-color: #0065ff;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #0065ff;
+}
+
+.reg:hover {
+  background-color: #ece9ff;
+  color: #0065ff;
 }
 
 .logo {
@@ -115,31 +131,6 @@ main {
   margin-left: 2rem;
   margin-right: 2rem;
   font-size: 20px;
-}
-
-.reg {
-  text-decoration: none;
-  font-weight: 700;
-  border-radius: 5px;
-
-  color: #f9fafc;
-  background-color: #5aac44;
-  text-decoration: none;
-  font-weight: 700;
-  border-radius: 5px;
-  text-align: center;
-  width: 80vw; 
-  max-width: 500px;
-  height: 60px;
-  padding: 0.5em 0;
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
-
-.reg:hover {
-  background-color: rgb(75, 201, 75);
-  transition: 0.3s background-color;
-  
 }
 
 .container-item {
@@ -476,4 +467,9 @@ a.name:hover {
   padding: 0.5em;
   margin-top: 0.5em;
   
+}
+
+.list {
+  margin-top: 0.2em;
+  min-height: 20px;
 }
