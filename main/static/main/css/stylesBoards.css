@@ -250,6 +250,8 @@ a.name:hover {
   font-size: 12px;
   cursor: pointer;
   margin-left: 0.2em;
+  border: none;
+
 }
 
 .add__btn span  {

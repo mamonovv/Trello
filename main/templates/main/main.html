@@ -1,5 +1,7 @@
 {% extends 'main/base.html'%}
 
+{% load static %}
+
 {% block content %}
 
 <main>
@@ -30,5 +32,8 @@
     </div>
   </section>
 </main>
+
+<script type="text/javascript" src={% static "main/js/main.js" %}></script>
+
 
 {% endblock %}
