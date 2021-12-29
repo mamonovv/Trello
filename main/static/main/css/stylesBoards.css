@@ -198,27 +198,13 @@ a.name:hover {
 }
 
 
-.list__item {
-  background-color: #fefefe;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  margin: 0.5em 0;
-  cursor: pointer;
-  font-size: 14px;
-  outline: auto;
-  border: none;
-  font-weight: 500;
-  outline: none;
-}
-
 .form {
   border-radius: 3px;
   margin-top: auto;
   display: none;
 }
 
-.textarea {
+/* .textarea {
   resize: none;
   height: 60px;
   border-radius: 3px;
@@ -230,7 +216,7 @@ a.name:hover {
 
 .textarea:focus {
   outline: none;
-}
+} */
 
 .buttons {
   display: flex;
@@ -371,6 +357,47 @@ a.name:hover {
 .btn-save:hover {
   background-color: #42a826;
 }
+
+
+
+.list__item {
+  background-color: #fefefe;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: center;
+  margin: 0.5em 0;
+  cursor: pointer;
+  font-size: 14px;
+  outline: auto;
+  border: none;
+  font-weight: 500;
+  outline: none;
+  position: relative;
+}
+
+.list__item button{
+  visibility: hidden;
+  height: max-content;
+  color: black;
+  background: none;
+  border: none;
+  padding: 0.3em;
+  position: absolute;
+  top: 20%;
+  right: 0;
+  margin-right: 5px;
+}
+
+.list__item:hover button{
+  visibility: visible;
+}
+
+.list__item button:hover{
+  background-color: rgba(116, 116, 116, 0.384);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 /* Вариант с классами ------------------------------------------------*/
 
 .todoList{

@@ -7,7 +7,6 @@ function addTask() {
   const addBtns = document.querySelectorAll('.add__btn')
   const inputCards = document.querySelectorAll('.add__board-input')
 
-
   inputCards.forEach(input => {
     input.addEventListener('input', () => {
       addBtns.forEach(btn => {
@@ -16,10 +15,21 @@ function addTask() {
 
           if (input.value != '') {
             const newCard = document.createElement('div')
+            const cardTitle = document.createElement('div')
+            const deleteButton = document.createElement('button')
+
+            deleteButton.innerText = 'X'
             newCard.classList.add('list__item')
             newCard.draggable = true
-            newCard.textContent = input.value
-            newCard.addEventListener('click', showMenu)
+            cardTitle.textContent = input.value
+
+            cardTitle.addEventListener('click', showMenu)
+            deleteButton.addEventListener('click', function(e) {
+              e.target.parentNode.remove()
+            })
+
+            newCard.append(cardTitle)
+            newCard.append(deleteButton)
 
             inputCards.forEach(inp => {
               inp.value = ''
@@ -33,6 +43,9 @@ function addTask() {
       })
     })
   })
+
+  
+
 
   
 }
@@ -134,19 +147,20 @@ function dragNdrop() {
 
       list.addEventListener('dragover', function(e) {
         e.preventDefault()
+        this.style.backgroundColor = 'rgba(120, 153, 253, 0.5)'
+
       } )
 
       list.addEventListener('dragenter', function(e) {
         e.preventDefault()
-        // this.style.backgroundColor = 'rgba(0,0,0,.3)'
       })
 
-      // list.addEventListener('dragleave', function(e) {
-      //   this.style.backgroundColor = 'rgba(0,0,0,0)'
-      // })
+      list.addEventListener('dragleave', function(e) {
+        this.style.backgroundColor = 'rgba(189,206,255,0)'
+      })
 
       list.addEventListener('drop', function(e) {
-        // this.style.backgroundColor = 'rgba(0,0,0,0)'
+        this.style.backgroundColor = 'rgba(189,206,255,0)'
         this.appendChild(draggedItem)
 
       })
