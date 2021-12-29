@@ -10,9 +10,10 @@ function addTask() {
 
   inputCards.forEach(input => {
     input.addEventListener('input', () => {
-      parent = input.parentNode.parentNode.querySelector('.list')
       addBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+          parent = input.parentNode.parentNode.querySelector('.list')
+
           if (input.value != '') {
             const newCard = document.createElement('div')
             newCard.classList.add('list__item')
@@ -20,7 +21,10 @@ function addTask() {
             newCard.textContent = input.value
             newCard.addEventListener('click', showMenu)
 
-            input.value = ''
+            inputCards.forEach(inp => {
+              inp.value = ''
+            })
+            // input.value = ''
       
             parent.append(newCard)
             dragNdrop()
@@ -122,10 +126,6 @@ function dragNdrop() {
         item.style.display = 'block'
         draggedItem = null
       }, 0)
-    })
-
-    item.addEventListener('dblclick', () => {
-      item.remove()
     })
 
     for (let j = 0; j < lists.length; j++) {
