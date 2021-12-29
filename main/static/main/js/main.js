@@ -1,4 +1,5 @@
 const button = document.querySelector('.button')
+const app = document.querySelector('.app')
 
 let draggedItem = null
 
@@ -17,6 +18,8 @@ function addTask() {
             newCard.classList.add('list__item')
             newCard.draggable = true
             newCard.textContent = input.value
+            newCard.addEventListener('click', showMenu)
+
             input.value = ''
       
             parent.append(newCard)
@@ -28,6 +31,50 @@ function addTask() {
   })
 
   
+}
+
+function showMenu() {
+  const menu = document.createElement('div')
+  const menuContainer = document.createElement('div')
+  const menuTitle = document.createElement('input')
+  const menuDescription = document.createElement('div')
+
+  const saveButton = document.createElement('button')
+  const description = document.createElement('textarea')
+
+  //Add class names
+  menu.className = 'menu'
+  menuContainer.className = 'menuContainer'
+  menuTitle.className = 'menuTitle'
+  menuDescription.className = 'menuDescription'
+  saveButton.innerText = 'Сохранить'
+  saveButton.className = 'btn-save'
+
+  //Event listeners
+  menuContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('menuContainer')) {
+      menuContainer.remove()
+    }
+  })
+
+  saveButton.addEventListener('click', () => {
+    saveButton.style.display = 'none'
+  })
+
+  menuDescription.addEventListener('input', () => {
+    saveButton.style.display = 'block'
+  })
+
+  //innerText
+  menuTitle.value = this.innerText
+
+  //Append
+  menuDescription.append(description)
+  menuDescription.append(saveButton)
+  menu.append(menuTitle)
+  menu.append(menuDescription)
+  menuContainer.append(menu)
+  app.append(menuContainer)
 }
 
 function addBoard() {
@@ -107,25 +154,7 @@ function dragNdrop() {
   }
 }
 
-// function dragNdrop() {
-//   listItems = document.querySelectorAll('.list__item')
-//   lists = document.querySelectorAll('.list')
-
-//   listItems.forEach( item => {
-//     draggedItem = item
-
-//     item.addEventListener('dragstart', e => {
-//       console.log('start')
-//     })
-
-//     item.addEventListener('dragend', e => {
-//       console.log('end')
-
-//     })
-
-//   })
-// }
-
 button.addEventListener('click', addBoard)
 addTask()
 dragNdrop()
+
