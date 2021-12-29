@@ -182,20 +182,6 @@ a.name:hover {
   border-radius: 3px;
 }
 
-.title {
-  background: none;
-  border: none;
-  border-radius: 3px;
-  width: 100%;
-  padding: 5px;
-  color: black;
-  font-weight: 500;
-  margin-bottom: 0.5em;
-}
-
-.title:focus {
-  outline: 1px solid rgba(92, 87, 87, 0.45);
-}
 
 
 .form {
@@ -397,6 +383,53 @@ a.name:hover {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.title {
+  background: none;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  padding: 5px;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  position: relative;
+}
+
+.title:focus {
+  outline: 1px solid rgba(92, 87, 87, 0.45);
+}
+
+.titleDiv {
+  position: relative;
+}
+
+.titleDiv button{
+  visibility: hidden;
+  height: max-content;
+  color: black;
+  background: none;
+  border: none;
+  padding: 0.3em;
+  position: absolute;
+  top: 5%;
+  right: 0;
+  margin-right: 5px;
+  background: white;
+  border-radius: 5px;
+}
+
+.titleDiv:hover button{
+  visibility: visible;
+}
+
+.titleDiv button:hover{
+  background-color: rgba(116, 116, 116, 0.384);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
 
 /* Вариант с классами ------------------------------------------------*/
 

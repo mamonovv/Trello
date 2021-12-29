@@ -99,20 +99,60 @@ function addBoard() {
   const boards = document.querySelector('.boards')
 
   if (input.value != '') {
+    //создаем элементы
     const board = document.createElement('div')
+
+    const titleDiv = document.createElement('div')
+    const titleInput = document.createElement('input')
+    const deleteButton = document.createElement('button')
+
+    const inputDiv = document.createElement('div')
+    const cardInput = document.createElement('input')
+    const addBtn = document.createElement('div')
+
+    const list = document.createElement('div')
+
+
+    // Стили
     board.classList.add('boards__item')
-    board.innerHTML = `
-      <input type="text" class="title" value="${input.value}">
+    titleInput.classList.add('title')
+    inputDiv.classList.add('add__card')
+    cardInput.classList.add('add__board-input')
+    addBtn.classList.add('add__btn')
+    list.classList.add('list')
+    titleDiv.classList.add('titleDiv')
+    
 
-      <div class="add__card">
-        <input placeholder="Карточка ..." class="add__board-input"type="text">
-        <div class="add__btn"><span> + </span></div>
-      </div>
+    
+    //вставляем значения
+    addBtn.innerHTML = `
+    <span> + </span>
+    `
 
-      <div class="list"></div>
-  `
-    input.value = ''
+    cardInput.placeholder = 'Карточка ...'
+    titleInput.value = input.value
+
+    deleteButton.innerText = 'X'
+
+    //добавляем слушатель
+    deleteButton.addEventListener('click', function(e) {
+      e.target.parentNode.parentNode.remove()
+    })
+
+
+
+    //добавляем элементы
+    titleDiv.append(titleInput)
+    titleDiv.append(deleteButton)
+
+    inputDiv.append(cardInput)
+    inputDiv.append(addBtn)
+    board.append(titleDiv)
+    board.append(inputDiv)
+    board.append(list)
     boards.append(board)
+
+    input.value = ''
     addTask()
     dragNdrop()
   }
