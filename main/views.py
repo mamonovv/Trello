@@ -5,7 +5,7 @@ from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout, login
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 
 from .forms import *
@@ -91,6 +91,29 @@ def new_board(request):
   # return render(request, 'main/newBoard.html', context=context)
   return render(request, 'main/newBoard.html', context=context)
 
+def is_ajax(request):
+  return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+
 def show_board(request, board_id):
-  board = Board.objects.get(pk=board_id)
-  return render(request, 'main/board.html', {'board': board})
+  if is_ajax(request=request) and request.method == "GET":
+    data = {
+      'first': '1',
+    }
+    return JsonResponse(data)
+  else:
+    board = Board.objects.get(pk=board_id)
+    return render(request, 'main/board.html', {'board': board})
+  
+  
+def add_column():
+  return HttpResponse('This is add_column')
+def del_column():
+  return HttpResponse('This is del_column')
+def add_card():
+  return HttpResponse('This is add_card')
+def del_card():
+  return HttpResponse('This is del_card')
+def move_card():
+  return HttpResponse('This is move_card')
+def edit_card():
+  return HttpResponse('This is edit_card')

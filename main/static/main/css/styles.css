@@ -6,7 +6,6 @@
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   font-family: 'Montserrat', sans-serif;
-
 }
 
 h1 {
@@ -45,7 +44,6 @@ main {
 .log {
   color: #0065ff;
   margin-right: 1em;
-
 }
 
 .log:hover {
@@ -77,7 +75,6 @@ main {
   text-decoration: underline;
   color: #6798e2;
 }
-
 
 .logo {
   width: 10em;

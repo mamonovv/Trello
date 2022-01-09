@@ -31,6 +31,8 @@ class Column(models.Model):
     verbose_name = 'Колонки'
     verbose_name_plural = 'Колонки'
   
+  def get_absolute_url(self):
+      return reverse('board', kwargs={'column_id': self.pk , 'board_id': self.board.pk}) #ВОТ ТУТ ПЫТАЛСЯ МЕНЯТЬ
 
 class Card(models.Model):
   name = models.CharField(max_length = 255, verbose_name="Название карточки")
