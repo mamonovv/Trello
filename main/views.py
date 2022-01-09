@@ -95,18 +95,33 @@ def is_ajax(request):
   return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 def show_board(request, board_id):
-  if is_ajax(request=request) and request.method == "GET":
-    data = {
-      'first': '1',
-    }
-    return JsonResponse(data)
-  else:
-    board = Board.objects.get(pk=board_id)
-    return render(request, 'main/board.html', {'board': board})
+  form = AddColumnForm()
+
+  board = Board.objects.get(pk=board_id)
+  columns = Column.objects.all()
+  return render(request, 'main/board.html', {'board': board, 'form': form, 'columns': columns})
   
   
-def add_column():
-  return HttpResponse('This is add_column')
+def add_column(request, board_id):
+  if request.method == 'POST':
+    form = AddColumnForm(request.POST)
+    if form.is_valid():
+      column = form.save(commit=False)
+      column.board = Board.objects.get(pk=board_id)
+      column.save()
+  response = {
+    'data': 'true',
+  }
+  return JsonResponse(response)
+
+
+  # context = {
+  #   'form': form, 
+  #   'cardBtn': 'Создать доску'
+  # }
+  # # return render(request, 'main/newBoard.html', context=context)
+  # return render(request, 'main/newBoard.html', context=context)
+
 def del_column():
   return HttpResponse('This is del_column')
 def add_card():

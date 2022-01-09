@@ -14,14 +14,11 @@ class AddBoardForm(forms.ModelForm):
     model = Board
     fields = ['name',]
   
-
-  
-
-
 class AddColumnForm(forms.ModelForm):
+  name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Введите название ...", 'class': 'add__board-input', 'id': 'add__board-input'}))
   class Meta:
-    model = Card
-    fields = '__all__'
+    model = Column
+    fields = ['name',]
 
 
 class AddCardForm(forms.ModelForm):

@@ -12,8 +12,8 @@ urlpatterns = [
     path('main/new_board/', new_board, name='new_board'),
     path('main/board/<int:board_id>/', show_board, name='board'),
     
-    path('main/board/addColumn/<int:column_id>', add_column, name='add_column'), #Изменил эти пути!!!!!!!!!!!
-    path('main/board/deleteColumn/<int:column_id>', del_column, name='del_column'),
+    path('main/board/<int:board_id>/addColumn', add_column, name='add_column'), #Изменил эти пути!!!!!!!!!!!
+    path('main/board/deleteColumn/<int:column_id>', del_column, name='del_column'), # + etot
 
     path('main/board/<int:board_id>/addCard/<int:card_id>', add_card, name='add_card'),
     path('main/board/<int:board_id>/deleteCard/<int:card_id>', del_card, name='del_card'),

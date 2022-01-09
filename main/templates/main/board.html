@@ -41,13 +41,38 @@
   </header>
 
   <div class="app">
-    {% if request.user.is_authenticated %} <div class="add__board">
-      <input placeholder="Введите название ..." class="add__board-input "type="text" id="add__board-input">
-      <div class="button">Добавить доску</div>
-    </div>
-      {% endif %}
+    {% if request.user.is_authenticated %} 
+      <form id="addBrd" class="add__board" method="post">
+        {% csrf_token %}
+        {% for f in form %}
+          <p>{{f}}</p>
+        {% endfor %}
+        <!-- <input placeholder="Введите название ..." class="add__board-input "type="text" id="add__board-input"> -->
+
+        <button type="submit" class="button">Добавить доску</button>
+      </form>
+    {% endif %}
     
-    <div class="boards"></div>
+    <div class="boards">
+      {% for c in columns %}
+        {% if c.board == board %}
+        <div class="boards__item">
+          <div class="titleDiv">
+            <input class="title" value={{c.name}}>
+            <button>X</button>
+          </div>
+          <div class="add__card">
+            <input placeholder="Карточка..." class="add__board-input">
+            <button class="add__btn">
+              <span> + </span>
+            </button>
+          </div>
+
+          <div class="list"></div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 
 

@@ -8,86 +8,94 @@ let draggedItem = null
 // }
 
 async function addBoard() {
+  let url = 'addColumn'
+
+  const ajaxSend = async (formData) => {
+    const fetchResp = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    })
+
+    if (!fetchResp.ok) {
+      throw new Error(
+        `Ошибка по адресу ${url}, статус ошибки ${fetchResp.status}`
+      )
+    }
+    return await fetchResp.text()
+  }
+
+  const form = document.getElementById('addBrd')
   const input = document.getElementById('add__board-input')
   const boards = document.querySelector('.boards')
 
-  if (input.value != '') {
-    //создаем элементы
-    const board = document.createElement('div')
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
 
-    const titleDiv = document.createElement('div')
-    const titleInput = document.createElement('input')
-    const deleteButton = document.createElement('button')
+    if (input.value != '') {
+      const formData = new FormData(this)
 
-    const inputDiv = document.createElement('div')
-    const cardInput = document.createElement('input')
-    const addBtn = document.createElement('button')
+      //создаем элементы
+      const board = document.createElement('div')
 
-    const list = document.createElement('div')
+      const titleDiv = document.createElement('div')
+      const titleInput = document.createElement('input')
+      const deleteButton = document.createElement('button')
 
-    // Стили
-    board.classList.add('boards__item')
-    titleInput.classList.add('title')
-    inputDiv.classList.add('add__card')
-    cardInput.classList.add('add__board-input')
-    addBtn.classList.add('add__btn')
-    list.classList.add('list')
-    titleDiv.classList.add('titleDiv')
+      const inputDiv = document.createElement('div')
+      const cardInput = document.createElement('input')
+      const addBtn = document.createElement('button')
 
-    //вставляем значения
-    addBtn.innerHTML = `
-    <span> + </span>
-    `
+      const list = document.createElement('div')
 
-    cardInput.placeholder = 'Карточка ...'
-    titleInput.value = input.value
+      // Стили
+      board.classList.add('boards__item')
+      titleInput.classList.add('title')
+      inputDiv.classList.add('add__card')
+      cardInput.classList.add('add__board-input')
+      addBtn.classList.add('add__btn')
+      list.classList.add('list')
+      titleDiv.classList.add('titleDiv')
 
-    deleteButton.innerText = 'X'
+      //вставляем значения
+      addBtn.innerHTML = `
+      <span> + </span>
+      `
 
-    //добавляем слушатель
-    deleteButton.addEventListener('click', function (e) {
-      //удаляем из БД--------
+      cardInput.placeholder = 'Карточка ...'
+      titleInput.value = input.value
 
-      e.target.parentNode.parentNode.remove()
-    })
+      deleteButton.innerText = 'X'
 
-    //добавляем элементы
-    titleDiv.append(titleInput)
-    titleDiv.append(deleteButton)
+      //добавляем слушатель
+      deleteButton.addEventListener('click', function (e) {
+        //удаляем из БД--------
 
-    inputDiv.append(cardInput)
-    inputDiv.append(addBtn)
-    board.append(titleDiv)
-    board.append(inputDiv)
-    board.append(list)
-    boards.append(board)
-
-    //Добавляем в БД-------------
-    let column_id = '1'
-    let url = `addColumn/${column_id}`
-    const data = { username: 'example' }
-    const csrftoken = {{ csrftoken }}
-    // const csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST', // или 'PUT'
-        body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
-        headers: {
-          'X-CSRFToken': csrftoken,
-          'Content-Type': 'application/json',
-        },
+        e.target.parentNode.parentNode.remove()
       })
-      const json = await response.json()
-      console.log('Успех:', JSON.stringify(json))
-    } catch (error) {
-      console.error('Ошибка:', error)
-    }
 
-    input.value = ''
-    addTask()
-    dragNdrop()
-  }
+      //добавляем элементы
+      titleDiv.append(titleInput)
+      titleDiv.append(deleteButton)
+
+      inputDiv.append(cardInput)
+      inputDiv.append(addBtn)
+      board.append(titleDiv)
+      board.append(inputDiv)
+      board.append(list)
+      boards.append(board)
+
+      //Добавляем в БД-------------
+      ajaxSend(formData)
+        .then((response) => {
+          console.log(response)
+          form.reset()
+        })
+        .catch((err) => console.error(err))
+
+      addTask()
+      dragNdrop()
+    }
+  })
 }
 
 async function addTask() {
