@@ -94,19 +94,6 @@ main {
   text-align: center;
 }
 
-.button {
-  background-color: #0065ff;
-  padding: 1em;
-  color: #ece9ff;
-  text-decoration: none;
-  border-radius: 50px;
-  font-weight: 700;
-  width: 20vw;
-  max-width: 170px;
-  text-align: center;
-  font-size: 15px;
-}
-
 .button:hover {
   background-color: #2461bd;
 }
@@ -201,6 +188,11 @@ a.name:hover {
 }
 
 .button {
+  padding: 1em;
+  text-decoration: none;
+  font-weight: 700;
+  text-align: center;
+
   height: 35px;
   display: flex;
   justify-content: center;
@@ -208,7 +200,7 @@ a.name:hover {
   background: #5aac44;
   border: none;
   cursor: pointer;
-  width: 150px;
+  width: 170px;
   color: white;
   border-radius: 3px;
   font-size: 14px;
