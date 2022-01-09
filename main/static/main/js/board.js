@@ -156,14 +156,12 @@ function addCard() {
       pk.classList.add('pk')
 
       deleteButton.innerText = 'X'
+      deleteButton.classList.add('deleteCard')
       newCard.classList.add('list__item')
       newCard.draggable = true
       cardTitle.textContent = input
 
       cardTitle.addEventListener('click', showMenu)
-      deleteButton.addEventListener('click', function (e) {
-        e.target.parentNode.remove()
-      })
 
       newCard.append(pk)
       newCard.append(description)
@@ -182,6 +180,29 @@ function addCard() {
 
       parent.append(newCard)
       dragNdrop()
+      deleteCard()
+    })
+  })
+}
+
+function deleteCard() {
+  const deleteBtns = document.querySelectorAll('.deleteCard')
+
+  deleteBtns.forEach((del) => {
+    del.addEventListener('click', (e) => {
+      let pk = e.target.parentNode.querySelector('.pk').innerText
+      let url = 'deleteCard/' + pk
+
+      fetch(url, {
+        method: 'DELETE',
+        credentials: 'same-origin',
+        headers: {
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
+      })
+        .then((res) => res.text()) // or res.json()
+        .then((res) => console.log(res))
+      e.target.parentNode.remove()
     })
   })
 }
@@ -310,3 +331,4 @@ button.addEventListener('click', addColumn)
 addCard()
 dragNdrop()
 deleteColumn()
+deleteCard()

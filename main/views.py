@@ -96,7 +96,8 @@ def show_board(request, board_id):
 
   board = Board.objects.get(pk=board_id)
   columns = Column.objects.all()
-  return render(request, 'main/board.html', {'board': board, 'formColumn': formColumn, 'formCard': formCard, 'columns': columns})
+  cards = Card.objects.all()
+  return render(request, 'main/board.html', {'board': board, 'formColumn': formColumn, 'formCard': formCard, 'columns': columns, 'cards':cards})
   
   
 def add_column(request, board_id):
@@ -133,8 +134,14 @@ def add_card(request, board_id, column_id):
   return JsonResponse(response)
 
 
-def del_card():
-  return HttpResponse('This is del_card')
+def del_card(request, board_id, card_id):
+  Card.objects.filter(pk=card_id).delete()
+  response = {
+    'data': 'true',
+  }
+  return JsonResponse(response)
+
+
 def move_card():
   return HttpResponse('This is move_card')
 def edit_card():
