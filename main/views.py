@@ -142,7 +142,20 @@ def del_card(request, board_id, card_id):
   return JsonResponse(response)
 
 
-def move_card():
-  return HttpResponse('This is move_card')
+def move_card(request, board_id, col_id, card_id):
+  card = Card.objects.get(pk=card_id)
+  col = Column.objects.get(pk=col_id)
+  card.column = col
+  # card.name = 'pomidor'
+  card.save()
+
+  response = {
+    'newCol': card.name
+    
+  }
+
+  return JsonResponse(response)
+
+
 def edit_card():
   return HttpResponse('This is edit_card')

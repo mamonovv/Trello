@@ -1,8 +1,15 @@
 const button = document.querySelector('.button')
 const app = document.querySelector('.app')
 const cardTitles = document.querySelectorAll('.cardTitle')
+const csrf = window.csrf_token
+  .split(' ')[3]
+  .split('=')[1]
+  .replace('"', '')
+  .slice(0, -2)
 
 let draggedItem = null
+
+console.log(csrf)
 
 const ajaxSend = async (formData, url) => {
   const fetchResp = await fetch(url, {
@@ -105,12 +112,13 @@ function addColumn() {
         input.value = ''
 
         addCard()
-        dragNdrop()
         deleteColumn()
+        dragNdrop()
       },
       { once: true }
     )
   }
+  return
 }
 
 function deleteColumn() {
@@ -159,7 +167,7 @@ function addCard() {
 
         description.className = 'desc'
         description.innerText = ''
-        description.classList.add('pk')
+        description.classList.add('none')
 
         pk.classList.add('pk')
 
@@ -279,21 +287,46 @@ function showMenu() {
 function dragNdrop() {
   const listItems = document.querySelectorAll('.list__item')
   const lists = document.querySelectorAll('.list')
+  let curCard = null
+  let newParent = null
 
   for (let i = 0; i < listItems.length; i++) {
     const item = listItems[i]
 
-    item.addEventListener('dragstart', () => {
+    item.addEventListener('dragstart', (e) => {
       draggedItem = item
       setTimeout(() => {
         item.style.display = 'none'
       }, 0)
     })
 
-    item.addEventListener('dragend', () => {
+    item.addEventListener('dragend', (e) => {
       setTimeout(() => {
         item.style.display = 'block'
+
+        newParent =
+          e.target.parentNode.parentNode.querySelector('.pk').innerText
+        curCard = e.target.querySelector('.pk').innerText
+        console.log(e.target)
+        url = `moveCard/${newParent}/${curCard}`
+
+        console.log(`NEW: ${newParent}, CARD: ${curCard}`)
+
+        fetch(url, {
+          method: 'POST', // or 'PUT'
+          headers: {
+            'X-CSRFToken': csrf,
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .catch((err) => console.error('Error:', err))
+
+        console.log(csrf)
+
         draggedItem = null
+        curCard = null
+        newParent = null
       }, 0)
     })
 
@@ -316,6 +349,8 @@ function dragNdrop() {
       list.addEventListener('drop', function (e) {
         this.style.backgroundColor = 'rgba(189,206,255,0)'
         this.appendChild(draggedItem)
+
+        flag = true
       })
     }
   }

@@ -386,6 +386,7 @@ a.name:hover {
   border-radius: 4px;
 }
 
-.pk {
+.pk,
+.none {
   display: none;
 }

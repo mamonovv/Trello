@@ -18,7 +18,7 @@ urlpatterns = [
     path('main/board/<int:board_id>/addCard/<int:column_id>', add_card, name='add_card'),
     path('main/board/<int:board_id>/deleteCard/<int:card_id>', del_card, name='del_card'),
     
-    path('main/board/<int:board_id>/moveCard', move_card, name='move_card'),
+    path('main/board/<int:board_id>/moveCard/<int:col_id>/<int:card_id>', move_card, name='move_card'),
     path('main/board/<int:board_id>/editCard', edit_card, name='edit_card'),
     
     
