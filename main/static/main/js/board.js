@@ -7,7 +7,7 @@ let draggedItem = null
 //   headers: { 'X-Requested-With': 'XMLHttpRequest' },
 // }
 
-async function addBoard() {
+function addBoard() {
   let url = 'addColumn'
 
   const ajaxSend = async (formData) => {
@@ -21,80 +21,112 @@ async function addBoard() {
         `Ошибка по адресу ${url}, статус ошибки ${fetchResp.status}`
       )
     }
-    return await fetchResp.text()
+    return await fetchResp.json()
   }
 
   const form = document.getElementById('addBrd')
   const input = document.getElementById('add__board-input')
   const boards = document.querySelector('.boards')
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault()
+  if (input.value != '') {
+    form.addEventListener(
+      'submit',
+      function (e) {
+        e.preventDefault()
 
-    if (input.value != '') {
-      const formData = new FormData(this)
+        const formData = new FormData(this)
 
-      //создаем элементы
-      const board = document.createElement('div')
+        //создаем элементы
+        const board = document.createElement('div')
 
-      const titleDiv = document.createElement('div')
-      const titleInput = document.createElement('input')
-      const deleteButton = document.createElement('button')
+        const titleDiv = document.createElement('div')
+        const titleInput = document.createElement('input')
+        const deleteButton = document.createElement('button')
 
-      const inputDiv = document.createElement('div')
-      const cardInput = document.createElement('input')
-      const addBtn = document.createElement('button')
+        const inputDiv = document.createElement('div')
+        const cardInput = document.createElement('input')
+        const addBtn = document.createElement('button')
 
-      const list = document.createElement('div')
+        const list = document.createElement('div')
 
-      // Стили
-      board.classList.add('boards__item')
-      titleInput.classList.add('title')
-      inputDiv.classList.add('add__card')
-      cardInput.classList.add('add__board-input')
-      addBtn.classList.add('add__btn')
-      list.classList.add('list')
-      titleDiv.classList.add('titleDiv')
+        const pk = document.createElement('p')
 
-      //вставляем значения
-      addBtn.innerHTML = `
-      <span> + </span>
-      `
+        //Добавляем в БД-------------
+        ajaxSend(formData)
+          .then((response) => {
+            pk.innerText = response.pk
+          })
+          .catch((err) => console.error(err))
 
-      cardInput.placeholder = 'Карточка ...'
-      titleInput.value = input.value
+        // Стили
+        board.classList.add('boards__item')
+        titleInput.classList.add('title')
+        inputDiv.classList.add('add__card')
+        cardInput.classList.add('add__board-input')
+        addBtn.classList.add('add__btn')
+        list.classList.add('list')
+        titleDiv.classList.add('titleDiv')
+        deleteButton.classList.add('deleteBoard')
+        pk.classList.add('pk')
 
-      deleteButton.innerText = 'X'
+        //вставляем значения
+        addBtn.innerHTML = `
+        <span> + </span>
+        `
 
-      //добавляем слушатель
-      deleteButton.addEventListener('click', function (e) {
-        //удаляем из БД--------
+        cardInput.placeholder = 'Карточка ...'
+        titleInput.value = input.value
 
-        e.target.parentNode.parentNode.remove()
+        deleteButton.innerText = 'X'
+
+        //добавляем слушатель
+        // deleteButton.addEventListener('click', function (e) {
+        //   //удаляем из БД--------
+
+        //   e.target.parentNode.parentNode.remove()
+        // })
+
+        //добавляем элементы
+        titleDiv.append(titleInput)
+        titleDiv.append(deleteButton)
+
+        inputDiv.append(cardInput)
+        inputDiv.append(addBtn)
+        board.append(pk)
+        board.append(titleDiv)
+        board.append(inputDiv)
+        board.append(list)
+        boards.append(board)
+
+        input.value = ''
+        addTask()
+        dragNdrop()
+        deleteBoard()
+      },
+      { once: true }
+    )
+  }
+}
+
+function deleteBoard() {
+  const deleteBtns = document.querySelectorAll('.deleteBoard')
+
+  deleteBtns.forEach((del) => {
+    del.addEventListener('click', (e) => {
+      let pk = e.target.parentNode.parentNode.querySelector('.pk').innerText
+      let url = 'deleteColumn/' + pk
+
+      fetch(url, {
+        method: 'DELETE',
+        credentials: 'same-origin',
+        headers: {
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
       })
-
-      //добавляем элементы
-      titleDiv.append(titleInput)
-      titleDiv.append(deleteButton)
-
-      inputDiv.append(cardInput)
-      inputDiv.append(addBtn)
-      board.append(titleDiv)
-      board.append(inputDiv)
-      board.append(list)
-      boards.append(board)
-
-      //Добавляем в БД-------------
-      ajaxSend(formData)
-        .then((response) => {
-          console.log(response)
-          form.reset()
-        })
-        .catch((err) => console.error(err))
-
-      addTask()
-      dragNdrop()
-    }
+        .then((res) => res.text()) // or res.json()
+        .then((res) => console.log(res))
+      e.target.parentNode.parentNode.remove()
+    })
   })
 }
 
@@ -247,6 +279,23 @@ async function dragNdrop() {
   }
 }
 
+function getCookie(name) {
+  var cookieValue = null
+  if (document.cookie && document.cookie !== '') {
+    var cookies = document.cookie.split(';')
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim()
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) === name + '=') {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+        break
+      }
+    }
+  }
+  return cookieValue
+}
+
 button.addEventListener('click', addBoard)
 addTask()
 dragNdrop()
+deleteBoard()

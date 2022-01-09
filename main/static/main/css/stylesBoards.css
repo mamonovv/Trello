@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
 
-input::-webkit-input-placeholder { color: black; }
+input::-webkit-input-placeholder {
+  color: black;
+}
 
 * {
   box-sizing: border-box;
@@ -8,7 +10,6 @@ input::-webkit-input-placeholder { color: black; }
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   font-family: 'Montserrat', sans-serif;
-
 }
 
 h1 {
@@ -39,15 +40,12 @@ main {
   margin: 0px 10vw;
 }
 
-
 .name {
   text-decoration: none;
   margin-right: 0;
   color: grey;
   font-weight: 500;
 }
-
-
 
 .log,
 .reg {
@@ -58,7 +56,6 @@ main {
 .log {
   color: #0065ff;
   margin-right: 1em;
-
 }
 
 .log:hover {
@@ -120,7 +117,7 @@ main {
 }
 
 .input-form {
-  width: 80vw; 
+  width: 80vw;
   max-width: 500px;
   height: 80px;
   margin-bottom: 1.5em;
@@ -175,10 +172,10 @@ a.name:hover {
   align-self: baseline;
   max-width: 250px;
   width: 100%;
-  background-color: rgb(189,206,255);
+  background-color: rgb(189, 206, 255);
   margin: 0 15px;
   padding: 10px;
-  transition: .3s all ease;
+  transition: 0.3s all ease;
   border-radius: 3px;
 }
 
@@ -195,10 +192,9 @@ a.name:hover {
   cursor: pointer;
   margin-left: 0.2em;
   border: none;
-
 }
 
-.add__btn span  {
+.add__btn span {
   font-size: 20px;
   margin-right: 10px;
   color: black;
@@ -231,6 +227,7 @@ a.name:hover {
   padding-left: 10px;
   outline: none;
   min-height: 35px;
+  margin-right: 10px;
 }
 
 .add__card {
@@ -239,7 +236,7 @@ a.name:hover {
   align-items: center;
 }
 
-.menuTitle{
+.menuTitle {
   font-weight: bold;
   font-size: 1.5em;
 
@@ -257,18 +254,17 @@ a.name:hover {
   outline: 1px solid rgba(92, 87, 87, 0.45);
 }
 
-
 .list {
   margin-top: 0.2em;
   min-height: 20px;
 }
 
-.menuDescription{
+.menuDescription {
   margin-bottom: 2em;
   line-height: 1.5em;
 }
 
-.menuDescription textarea{
+.menuDescription textarea {
   width: 100%;
   height: 5em;
   padding: 0.5em;
@@ -278,7 +274,7 @@ a.name:hover {
   border-radius: 5px;
 }
 
-.btn-save{
+.btn-save {
   background-color: #5aac44;
   color: white;
   border: none;
@@ -308,7 +304,7 @@ a.name:hover {
   position: relative;
 }
 
-.list__item button{
+.list__item button {
   visibility: hidden;
   height: max-content;
   color: black;
@@ -321,11 +317,11 @@ a.name:hover {
   margin-right: 5px;
 }
 
-.list__item:hover button{
+.list__item:hover button {
   visibility: visible;
 }
 
-.list__item button:hover{
+.list__item button:hover {
   background-color: rgba(116, 116, 116, 0.384);
   border-radius: 4px;
   cursor: pointer;
@@ -351,7 +347,7 @@ a.name:hover {
   position: relative;
 }
 
-.titleDiv button{
+.titleDiv button {
   visibility: hidden;
   height: max-content;
   color: black;
@@ -366,17 +362,17 @@ a.name:hover {
   border-radius: 5px;
 }
 
-.titleDiv:hover button{
+.titleDiv:hover button {
   visibility: visible;
 }
 
-.titleDiv button:hover{
+.titleDiv button:hover {
   background-color: rgba(116, 116, 116, 0.384);
   border-radius: 4px;
   cursor: pointer;
 }
 
-.menuContainer{
+.menuContainer {
   display: flex;
 
   position: absolute;
@@ -387,7 +383,7 @@ a.name:hover {
   height: 100%;
 }
 
-.menu{
+.menu {
   top: 0;
   left: 0;
   background-color: rgb(235, 235, 235);
@@ -398,9 +394,6 @@ a.name:hover {
   border-radius: 4px;
 }
 
-
-
-
-
-
-
+.pk {
+  display: none;
+}

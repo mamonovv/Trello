@@ -57,9 +57,11 @@
       {% for c in columns %}
         {% if c.board == board %}
         <div class="boards__item">
+          <p class='pk'>{{c.pk}}</p>
+          
           <div class="titleDiv">
             <input class="title" value={{c.name}}>
-            <button>X</button>
+            <button class="deleteBoard">X</button>
           </div>
           <div class="add__card">
             <input placeholder="Карточка..." class="add__board-input">

@@ -88,11 +88,7 @@ def new_board(request):
     'form': form, 
     'cardBtn': 'Создать доску'
   }
-  # return render(request, 'main/newBoard.html', context=context)
   return render(request, 'main/newBoard.html', context=context)
-
-def is_ajax(request):
-  return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 def show_board(request, board_id):
   form = AddColumnForm()
@@ -110,7 +106,7 @@ def add_column(request, board_id):
       column.board = Board.objects.get(pk=board_id)
       column.save()
   response = {
-    'data': 'true',
+    'pk': column.pk,
   }
   return JsonResponse(response)
 
@@ -122,8 +118,14 @@ def add_column(request, board_id):
   # # return render(request, 'main/newBoard.html', context=context)
   # return render(request, 'main/newBoard.html', context=context)
 
-def del_column():
-  return HttpResponse('This is del_column')
+def del_column(request, board_id, column_id):
+  Column.objects.filter(pk=column_id).delete()
+  response = {
+    'data': 'true',
+  }
+  return JsonResponse(response)
+
+
 def add_card():
   return HttpResponse('This is add_card')
 def del_card():
