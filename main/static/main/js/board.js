@@ -1,5 +1,6 @@
 const button = document.querySelector('.button')
 const app = document.querySelector('.app')
+const cardTitles = document.querySelectorAll('.cardTitle')
 
 let draggedItem = null
 
@@ -151,15 +152,18 @@ function addCard() {
 
       description.className = 'desc'
       description.innerText = ''
-      description.style.display = 'none'
+      description.classList.add('pk')
 
       pk.classList.add('pk')
 
       deleteButton.innerText = 'X'
       deleteButton.classList.add('deleteCard')
+
       newCard.classList.add('list__item')
       newCard.draggable = true
+
       cardTitle.textContent = input
+      cardTitle.classList.add('cardTitle')
 
       cardTitle.addEventListener('click', showMenu)
 
@@ -209,7 +213,7 @@ function deleteCard() {
 
 function deleteTask() {}
 
-async function showMenu() {
+function showMenu() {
   const menu = document.createElement('div')
   const menuContainer = document.createElement('div')
   const menuTitle = document.createElement('input')
@@ -266,7 +270,7 @@ async function showMenu() {
   app.append(menuContainer)
 }
 
-async function dragNdrop() {
+function dragNdrop() {
   const listItems = document.querySelectorAll('.list__item')
   const lists = document.querySelectorAll('.list')
 
@@ -328,6 +332,10 @@ function getCookie(name) {
 }
 
 button.addEventListener('click', addColumn)
+cardTitles.forEach((card) => {
+  card.addEventListener('click', showMenu)
+})
+
 addCard()
 dragNdrop()
 deleteColumn()
