@@ -45,7 +45,7 @@
       <form id="addBrd" class="add__board" method="post">
         {% csrf_token %}
         {% for f in formColumn %}
-          <p>{{f}}</p>
+          {{f}}
         {% endfor %}
         <!-- <input placeholder="Введите название ..." class="add__board-input "type="text" id="add__board-input"> -->
 
@@ -68,7 +68,7 @@
           <form class="add__card">
             {% csrf_token %}
             {% for f in formCard %}
-              <p>{{f}}</p>
+              {{f}}
             {% endfor %}
             <!-- <input placeholder="Карточка..." class="add__board-input cardInput"> -->
             <button type="submit" class="add__btn">
@@ -93,8 +93,9 @@
       {% endfor %}
     </div>
   </div>
-
-
+  <script>
+    window.csrf_token = '{% csrf_token %}';
+  </script>
   <script type="application/javascript" src={% static "main/js/board.js" %}></script>
   </body>
 </html>

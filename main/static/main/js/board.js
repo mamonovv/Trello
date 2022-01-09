@@ -41,6 +41,7 @@ function addColumn() {
         const deleteButton = document.createElement('button')
 
         const inputDiv = document.createElement('form')
+        const csrf = document.createElement('input')
         const cardInput = document.createElement('input')
         const addBtn = document.createElement('button')
 
@@ -55,12 +56,23 @@ function addColumn() {
           })
           .catch((err) => console.error(err))
 
+        //csrf
+        csrf.type = 'hidden'
+        csrf.name = 'csrfmiddlewaretoken'
+        csrf.value = window.csrf_token
+          .split(' ')[3]
+          .split('=')[1]
+          .replace('"', '')
+          .slice(0, -2)
+
         // Стили
         board.classList.add('boards__item')
         titleInput.classList.add('title')
         inputDiv.classList.add('add__card')
         cardInput.classList.add('add__board-input')
         cardInput.classList.add('cardInput')
+        cardInput.type = 'text'
+        cardInput.name = 'name'
         addBtn.classList.add('add__btn')
         list.classList.add('list')
         titleDiv.classList.add('titleDiv')
@@ -77,17 +89,11 @@ function addColumn() {
 
         deleteButton.innerText = 'X'
 
-        //добавляем слушатель
-        // deleteButton.addEventListener('click', function (e) {
-        //   //удаляем из БД--------
-
-        //   e.target.parentNode.parentNode.remove()
-        // })
-
         //добавляем элементы
         titleDiv.append(titleInput)
         titleDiv.append(deleteButton)
 
+        inputDiv.appendChild(csrf)
         inputDiv.append(cardInput)
         inputDiv.append(addBtn)
         board.append(pk)
@@ -130,7 +136,6 @@ function deleteColumn() {
 
 function addCard() {
   const forms = document.querySelectorAll('.add__card')
-  const inputs = document.querySelectorAll('.cardInput')
 
   forms.forEach((form) => {
     form.addEventListener('submit', function (e) {
