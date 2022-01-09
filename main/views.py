@@ -91,11 +91,12 @@ def new_board(request):
   return render(request, 'main/newBoard.html', context=context)
 
 def show_board(request, board_id):
-  form = AddColumnForm()
+  formColumn = AddColumnForm()
+  formCard = AddCardForm()
 
   board = Board.objects.get(pk=board_id)
   columns = Column.objects.all()
-  return render(request, 'main/board.html', {'board': board, 'form': form, 'columns': columns})
+  return render(request, 'main/board.html', {'board': board, 'formColumn': formColumn, 'formCard': formCard, 'columns': columns})
   
   
 def add_column(request, board_id):
@@ -111,13 +112,6 @@ def add_column(request, board_id):
   return JsonResponse(response)
 
 
-  # context = {
-  #   'form': form, 
-  #   'cardBtn': 'Создать доску'
-  # }
-  # # return render(request, 'main/newBoard.html', context=context)
-  # return render(request, 'main/newBoard.html', context=context)
-
 def del_column(request, board_id, column_id):
   Column.objects.filter(pk=column_id).delete()
   response = {
@@ -126,8 +120,19 @@ def del_column(request, board_id, column_id):
   return JsonResponse(response)
 
 
-def add_card():
-  return HttpResponse('This is add_card')
+def add_card(request, board_id, column_id):
+  if request.method == 'POST':
+    form = AddCardForm(request.POST)
+    if form.is_valid():
+      card = form.save(commit=False)
+      card.column = Column.objects.get(pk=column_id)
+      card.save()
+  response = {
+    'pk': card.pk,
+  }
+  return JsonResponse(response)
+
+
 def del_card():
   return HttpResponse('This is del_card')
 def move_card():

@@ -44,7 +44,7 @@
     {% if request.user.is_authenticated %} 
       <form id="addBrd" class="add__board" method="post">
         {% csrf_token %}
-        {% for f in form %}
+        {% for f in formColumn %}
           <p>{{f}}</p>
         {% endfor %}
         <!-- <input placeholder="Введите название ..." class="add__board-input "type="text" id="add__board-input"> -->
@@ -59,18 +59,26 @@
         <div class="boards__item">
           <p class='pk'>{{c.pk}}</p>
           
-          <div class="titleDiv">
+          <form class="titleDiv">
+            {% csrf_token %}
             <input class="title" value={{c.name}}>
-            <button class="deleteBoard">X</button>
-          </div>
-          <div class="add__card">
-            <input placeholder="Карточка..." class="add__board-input">
-            <button class="add__btn">
+            <button type="submit" class="deleteBoard">X</button>
+          </form>
+
+          <form class="add__card">
+            {% csrf_token %}
+            {% for f in formCard %}
+              <p>{{f}}</p>
+            {% endfor %}
+            <!-- <input placeholder="Карточка..." class="add__board-input cardInput"> -->
+            <button type="submit" class="add__btn">
               <span> + </span>
             </button>
-          </div>
+          </form>
 
-          <div class="list"></div>
+          <div class="list">
+            
+          </div>
         </div>
         {% endif %}
       {% endfor %}
