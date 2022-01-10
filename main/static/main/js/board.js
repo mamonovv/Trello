@@ -177,6 +177,7 @@ const addCard = (form) => (e) => {
     cardTitle.classList.add('cardTitle')
 
     deleteButton.addEventListener('click', delCard)
+    cardTitle.addEventListener('click', showMenu(cardTitle))
 
     newCard.append(pk)
     newCard.append(description)
@@ -184,7 +185,6 @@ const addCard = (form) => (e) => {
     newCard.append(deleteButton)
 
     newCard.addEventListener('dragstart', dragNdrop(newCard))
-    newCard.addEventListener('click', showMenu(newCard))
 
     //Добавляем в БД-------------
     ajaxSend(formData, url)
@@ -250,7 +250,7 @@ const showMenu = (card) => (e) => {
 
   saveButton.innerText = 'Сохранить'
   description.style.resize = 'none'
-  description.innerText = card.querySelector('.desc').innerText
+  description.innerText = card.parentNode.querySelector('.desc').innerText
 
   //Event listeners
   menuContainer.addEventListener('click', (e) => {
@@ -261,7 +261,7 @@ const showMenu = (card) => (e) => {
 
   saveButton.addEventListener('click', () => {
     saveButton.style.display = 'none'
-    card.querySelector('.desc').innerText = description.value
+    card.parentNode.querySelector('.desc').innerText = description.value
   })
 
   menuDescription.addEventListener('input', () => {
@@ -272,13 +272,13 @@ const showMenu = (card) => (e) => {
     // Number 13 is the "Enter"
     if (e.keyCode === 13) {
       e.preventDefault()
-      card.querySelector('.cardTitle').innerText = menuTitle.value
+      card.innerText = menuTitle.value
       menuTitle.blur()
     }
   })
 
   //innerText
-  menuTitle.value = card.querySelector('.cardTitle').innerText
+  menuTitle.value = card.innerText
 
   //Append
   menuDescription.append(description)
@@ -290,7 +290,7 @@ const showMenu = (card) => (e) => {
 }
 
 const showMenuOnLoad = () => {
-  const cards = document.querySelectorAll('.list__item')
+  const cards = document.querySelectorAll('.cardTitle')
 
   cards.forEach((card) => {
     card.addEventListener('click', showMenu(card))
