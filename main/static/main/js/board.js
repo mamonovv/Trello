@@ -1,6 +1,5 @@
 const button = document.querySelector('.button')
 const app = document.querySelector('.app')
-const cardTitles = document.querySelectorAll('.cardTitle')
 const csrf = window.csrf_token
   .split(' ')[3]
   .split('=')[1]
@@ -177,7 +176,6 @@ const addCard = (form) => (e) => {
     cardTitle.textContent = input
     cardTitle.classList.add('cardTitle')
 
-    cardTitle.addEventListener('click', showMenu)
     deleteButton.addEventListener('click', delCard)
 
     newCard.append(pk)
@@ -186,6 +184,7 @@ const addCard = (form) => (e) => {
     newCard.append(deleteButton)
 
     newCard.addEventListener('dragstart', dragNdrop(newCard))
+    newCard.addEventListener('click', showMenu(newCard))
 
     //Добавляем в БД-------------
     ajaxSend(formData, url)
@@ -233,7 +232,7 @@ const deleteCardOnLoad = () => {
   })
 }
 
-const showMenu = () => {
+const showMenu = (card) => (e) => {
   const menu = document.createElement('div')
   const menuContainer = document.createElement('div')
   const menuTitle = document.createElement('input')
@@ -251,7 +250,7 @@ const showMenu = () => {
 
   saveButton.innerText = 'Сохранить'
   description.style.resize = 'none'
-  description.innerText = this.parentNode.querySelector('.desc').innerText
+  description.innerText = card.querySelector('.desc').innerText
 
   //Event listeners
   menuContainer.addEventListener('click', (e) => {
@@ -262,7 +261,7 @@ const showMenu = () => {
 
   saveButton.addEventListener('click', () => {
     saveButton.style.display = 'none'
-    this.parentNode.querySelector('.desc').innerText = description.value
+    card.querySelector('.desc').innerText = description.value
   })
 
   menuDescription.addEventListener('input', () => {
@@ -273,13 +272,13 @@ const showMenu = () => {
     // Number 13 is the "Enter"
     if (e.keyCode === 13) {
       e.preventDefault()
-      this.innerText = menuTitle.value
+      card.querySelector('.cardTitle').innerText = menuTitle.value
       menuTitle.blur()
     }
   })
 
   //innerText
-  menuTitle.value = this.innerText
+  menuTitle.value = card.querySelector('.cardTitle').innerText
 
   //Append
   menuDescription.append(description)
@@ -288,6 +287,14 @@ const showMenu = () => {
   menu.append(menuDescription)
   menuContainer.append(menu)
   app.append(menuContainer)
+}
+
+const showMenuOnLoad = () => {
+  const cards = document.querySelectorAll('.list__item')
+
+  cards.forEach((card) => {
+    card.addEventListener('click', showMenu(card))
+  })
 }
 
 const dragNdrop = (card) => (e) => {
@@ -381,19 +388,10 @@ const getCookie = (name) => {
   return cookieValue
 }
 
-button.addEventListener('click', addColumn)
-cardTitles.forEach((card) => {
-  card.addEventListener('click', showMenu)
-})
-
-// addCard()
 addCardOnLoad()
-
-// dragNdrop()
 dragNdropOnLoad()
-
-// deleteColumn()
 deleteColumnOnLoad()
-
-// deleteCard()
 deleteCardOnLoad()
+showMenuOnLoad()
+
+button.addEventListener('click', addColumn)
