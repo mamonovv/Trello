@@ -7,9 +7,8 @@ const csrf = window.csrf_token
   .replace('"', '')
   .slice(0, -2)
 
+let flag = true
 let draggedItem = null
-
-console.log(csrf)
 
 const ajaxSend = async (formData, url) => {
   const fetchResp = await fetch(url, {
@@ -25,7 +24,7 @@ const ajaxSend = async (formData, url) => {
   return await fetchResp.json()
 }
 
-function addColumn() {
+const addColumn = () => {
   let url = 'addColumn'
 
   const form = document.getElementById('addBrd')
@@ -47,7 +46,7 @@ function addColumn() {
         const titleInput = document.createElement('input')
         const deleteButton = document.createElement('button')
 
-        const inputDiv = document.createElement('form')
+        const inputForm = document.createElement('form')
         const csrf = document.createElement('input')
         const cardInput = document.createElement('input')
         const addBtn = document.createElement('button')
@@ -75,7 +74,7 @@ function addColumn() {
         // Стили
         board.classList.add('boards__item')
         titleInput.classList.add('title')
-        inputDiv.classList.add('add__card')
+        inputForm.classList.add('add__card')
         cardInput.classList.add('add__board-input')
         cardInput.classList.add('cardInput')
         cardInput.type = 'text'
@@ -100,132 +99,254 @@ function addColumn() {
         titleDiv.append(titleInput)
         titleDiv.append(deleteButton)
 
-        inputDiv.appendChild(csrf)
-        inputDiv.append(cardInput)
-        inputDiv.append(addBtn)
+        inputForm.appendChild(csrf)
+        inputForm.append(cardInput)
+        inputForm.append(addBtn)
         board.append(pk)
         board.append(titleDiv)
-        board.append(inputDiv)
+        board.append(inputForm)
         board.append(list)
         boards.append(board)
 
+        //Слушатель
+        deleteButton.addEventListener('click', delColumn)
+        inputForm.addEventListener('submit', addCard(inputForm))
+
         input.value = ''
 
-        addCard()
-        deleteColumn()
+        // addCard()
+        // deleteColumn()
         dragNdrop()
       },
       { once: true }
     )
   }
-  return
 }
 
-function deleteColumn() {
+const delColumn = (e) => {
+  e.preventDefault()
+  let pk = e.target.parentNode.parentNode.querySelector('.pk').innerText
+  let url = 'deleteColumn/' + pk
+
+  fetch(url, {
+    method: 'DELETE',
+    credentials: 'same-origin',
+    headers: {
+      'X-CSRFToken': getCookie('csrftoken'),
+    },
+  })
+    .then((res) => res.text()) // or res.json()
+    .then((res) => console.log(res))
+  e.target.parentNode.parentNode.remove()
+}
+
+const deleteColumnOnLoad = () => {
   const deleteBtns = document.querySelectorAll('.deleteBoard')
 
   deleteBtns.forEach((del) => {
-    del.addEventListener('click', (e) => {
-      let pk = e.target.parentNode.parentNode.querySelector('.pk').innerText
-      let url = 'deleteColumn/' + pk
-
-      fetch(url, {
-        method: 'DELETE',
-        credentials: 'same-origin',
-        headers: {
-          'X-CSRFToken': getCookie('csrftoken'),
-        },
-      })
-        .then((res) => res.text()) // or res.json()
-        .then((res) => console.log(res))
-      e.target.parentNode.parentNode.remove()
-    })
+    del.addEventListener('click', delColumn)
   })
 }
 
-function addCard() {
+// function deleteColumn() {
+//   const deleteBtns = document.querySelectorAll('.deleteBoard')
+
+//   deleteBtns.forEach((del) => {
+//     del.addEventListener('click', (e) => {
+//       let pk = e.target.parentNode.parentNode.querySelector('.pk').innerText
+//       let url = 'deleteColumn/' + pk
+
+//       fetch(url, {
+//         method: 'DELETE',
+//         credentials: 'same-origin',
+//         headers: {
+//           'X-CSRFToken': getCookie('csrftoken'),
+//         },
+//       })
+//         .then((res) => res.text()) // or res.json()
+//         .then((res) => console.log(res))
+//       e.target.parentNode.parentNode.remove()
+//     })
+//   })
+// }
+
+const addCard = (form) => (e) => {
+  e.preventDefault()
+
+  let input = e.target.querySelector('.cardInput').value
+
+  if (input != '') {
+    const formData = new FormData(form)
+    let column_id = e.target.parentNode.querySelector('.pk').innerText
+    let url = 'addCard/' + column_id
+
+    let parent = e.target.parentNode.querySelector('.list')
+
+    const newCard = document.createElement('div')
+    const cardTitle = document.createElement('div')
+    const deleteButton = document.createElement('button')
+    const description = document.createElement('p')
+    const pk = document.createElement('p')
+
+    description.className = 'desc'
+    description.innerText = ''
+    description.classList.add('none')
+
+    pk.classList.add('pk')
+
+    deleteButton.innerText = 'X'
+    deleteButton.classList.add('deleteCard')
+
+    newCard.classList.add('list__item')
+    newCard.draggable = true
+
+    cardTitle.textContent = input
+    cardTitle.classList.add('cardTitle')
+
+    cardTitle.addEventListener('click', showMenu)
+    deleteButton.addEventListener('click', delCard)
+
+    newCard.append(pk)
+    newCard.append(description)
+    newCard.append(cardTitle)
+    newCard.append(deleteButton)
+
+    // newCard.addEventListener('dragstart', dragNdrop(newCard))
+
+    //Добавляем в БД-------------
+    ajaxSend(formData, url)
+      .then((response) => {
+        pk.innerText = response.pk
+        form.reset()
+      })
+      .catch((err) => console.error(err))
+
+    e.target.querySelector('.cardInput').value = ''
+
+    parent.append(newCard)
+    dragNdrop()
+    // deleteCard()
+  }
+}
+
+const addCardOnLoad = () => {
   const forms = document.querySelectorAll('.add__card')
 
   forms.forEach((form) => {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault()
-
-      let input = e.target.querySelector('.cardInput').value
-
-      if (input != '') {
-        const formData = new FormData(this)
-        let column_id = e.target.parentNode.querySelector('.pk').innerText
-        let url = 'addCard/' + column_id
-
-        let parent = e.target.parentNode.querySelector('.list')
-
-        const newCard = document.createElement('div')
-        const cardTitle = document.createElement('div')
-        const deleteButton = document.createElement('button')
-        const description = document.createElement('p')
-        const pk = document.createElement('p')
-
-        description.className = 'desc'
-        description.innerText = ''
-        description.classList.add('none')
-
-        pk.classList.add('pk')
-
-        deleteButton.innerText = 'X'
-        deleteButton.classList.add('deleteCard')
-
-        newCard.classList.add('list__item')
-        newCard.draggable = true
-
-        cardTitle.textContent = input
-        cardTitle.classList.add('cardTitle')
-
-        cardTitle.addEventListener('click', showMenu)
-
-        newCard.append(pk)
-        newCard.append(description)
-        newCard.append(cardTitle)
-        newCard.append(deleteButton)
-
-        //Добавляем в БД-------------
-        ajaxSend(formData, url)
-          .then((response) => {
-            pk.innerText = response.pk
-            form.reset()
-          })
-          .catch((err) => console.error(err))
-
-        e.target.querySelector('.cardInput').value = ''
-
-        parent.append(newCard)
-        dragNdrop()
-        deleteCard()
-      }
-    })
+    form.addEventListener('submit', addCard(form))
   })
 }
 
-function deleteCard() {
+// function addCard() {
+//   const forms = document.querySelectorAll('.add__card')
+
+//   forms.forEach((form) => {
+//     form.addEventListener('submit', function (e) {
+//       e.preventDefault()
+
+//       let input = e.target.querySelector('.cardInput').value
+
+//       if (input != '') {
+//         const formData = new FormData(this)
+//         let column_id = e.target.parentNode.querySelector('.pk').innerText
+//         let url = 'addCard/' + column_id
+
+//         let parent = e.target.parentNode.querySelector('.list')
+
+//         const newCard = document.createElement('div')
+//         const cardTitle = document.createElement('div')
+//         const deleteButton = document.createElement('button')
+//         const description = document.createElement('p')
+//         const pk = document.createElement('p')
+
+//         description.className = 'desc'
+//         description.innerText = ''
+//         description.classList.add('none')
+
+//         pk.classList.add('pk')
+
+//         deleteButton.innerText = 'X'
+//         deleteButton.classList.add('deleteCard')
+
+//         newCard.classList.add('list__item')
+//         newCard.draggable = true
+
+//         cardTitle.textContent = input
+//         cardTitle.classList.add('cardTitle')
+
+//         cardTitle.addEventListener('click', showMenu)
+//         deleteButton.addEventListener('click', delCard)
+
+//         newCard.append(pk)
+//         newCard.append(description)
+//         newCard.append(cardTitle)
+//         newCard.append(deleteButton)
+
+//         // newCard.addEventListener('dragstart', dragNdrop(newCard))
+
+//         //Добавляем в БД-------------
+//         ajaxSend(formData, url)
+//           .then((response) => {
+//             pk.innerText = response.pk
+//             form.reset()
+//           })
+//           .catch((err) => console.error(err))
+
+//         e.target.querySelector('.cardInput').value = ''
+
+//         parent.append(newCard)
+//         dragNdrop()
+//         // deleteCard()
+//       }
+//     })
+//   })
+// }
+
+const delCard = (e) => {
+  let pk = e.target.parentNode.querySelector('.pk').innerText
+  let url = 'deleteCard/' + pk
+
+  fetch(url, {
+    method: 'DELETE',
+    credentials: 'same-origin',
+    headers: {
+      'X-CSRFToken': getCookie('csrftoken'),
+    },
+  })
+    .then((res) => res.text()) // or res.json()
+    .then((res) => console.log(res))
+  e.target.parentNode.remove()
+}
+
+function deleteCardOnLoad() {
   const deleteBtns = document.querySelectorAll('.deleteCard')
 
   deleteBtns.forEach((del) => {
-    del.addEventListener('click', (e) => {
-      let pk = e.target.parentNode.querySelector('.pk').innerText
-      let url = 'deleteCard/' + pk
-
-      fetch(url, {
-        method: 'DELETE',
-        credentials: 'same-origin',
-        headers: {
-          'X-CSRFToken': getCookie('csrftoken'),
-        },
-      })
-        .then((res) => res.text()) // or res.json()
-        .then((res) => console.log(res))
-      e.target.parentNode.remove()
-    })
+    del.addEventListener('click', delCard)
   })
 }
+
+// function deleteCard() {
+//   const deleteBtns = document.querySelectorAll('.deleteCard')
+
+//   deleteBtns.forEach((del) => {
+//     del.addEventListener('click', (e) => {
+//       let pk = e.target.parentNode.querySelector('.pk').innerText
+//       let url = 'deleteCard/' + pk
+
+//       fetch(url, {
+//         method: 'DELETE',
+//         credentials: 'same-origin',
+//         headers: {
+//           'X-CSRFToken': getCookie('csrftoken'),
+//         },
+//       })
+//         .then((res) => res.text()) // or res.json()
+//         .then((res) => console.log(res))
+//       e.target.parentNode.remove()
+//     })
+//   })
+// }
 
 function showMenu() {
   const menu = document.createElement('div')
@@ -295,6 +416,7 @@ function dragNdrop() {
 
     item.addEventListener('dragstart', (e) => {
       draggedItem = item
+      console.log(draggedItem)
       setTimeout(() => {
         item.style.display = 'none'
       }, 0)
@@ -307,7 +429,6 @@ function dragNdrop() {
         newParent =
           e.target.parentNode.parentNode.querySelector('.pk').innerText
         curCard = e.target.querySelector('.pk').innerText
-        console.log(e.target)
         url = `moveCard/${newParent}/${curCard}`
 
         console.log(`NEW: ${newParent}, CARD: ${curCard}`)
@@ -322,14 +443,11 @@ function dragNdrop() {
           .then((response) => response.json())
           .catch((err) => console.error('Error:', err))
 
-        console.log(csrf)
-
         draggedItem = null
         curCard = null
         newParent = null
       }, 0)
     })
-
     for (let j = 0; j < lists.length; j++) {
       const list = lists[j]
 
@@ -349,8 +467,6 @@ function dragNdrop() {
       list.addEventListener('drop', function (e) {
         this.style.backgroundColor = 'rgba(189,206,255,0)'
         this.appendChild(draggedItem)
-
-        flag = true
       })
     }
   }
@@ -377,7 +493,11 @@ cardTitles.forEach((card) => {
   card.addEventListener('click', showMenu)
 })
 
-addCard()
+// addCard()
+addCardOnLoad()
+
 dragNdrop()
-deleteColumn()
-deleteCard()
+// deleteColumn()
+deleteColumnOnLoad()
+// deleteCard()
+deleteCardOnLoad()
