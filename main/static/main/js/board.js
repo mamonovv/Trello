@@ -233,40 +233,62 @@ const deleteCardOnLoad = () => {
 }
 
 const showMenu = (card) => (e) => {
-  const menu = document.createElement('div')
   const menuContainer = document.createElement('div')
-  const menuTitle = document.createElement('input')
-  const menuDescription = document.createElement('div')
+  const menu = document.createElement('div')
 
+  const form = document.createElement('form')
+  const menuTitle = document.createElement('input')
+  // const menuDescription = document.createElement('div')
+  const descCard = document.createElement('textarea')
+  const deadline = document.createElement('input')
+  const photo = document.createElement('input')
+
+  const btns = document.createElement('div')
   const saveButton = document.createElement('button')
-  const description = document.createElement('textarea')
+  const cancelButton = document.createElement('button')
+
+  //Add types
+  deadline.type = 'datetime-local'
+  photo.type = 'file'
 
   //Add class names
+  form.className = 'popUpForm'
   menu.className = 'menu'
   menuContainer.className = 'menuContainer'
   menuTitle.className = 'menuTitle'
-  menuDescription.className = 'menuDescription'
+  // menuDescription.className = 'menuDescription'
   saveButton.className = 'btn-save'
+  cancelButton.className = 'btn-cancel'
+  descCard.className = 'popUpArea'
+  btns.className = 'popUpBtns'
+
+  deadline.className = 'popUpDate'
+  photo.className = 'popUpFile'
+
+  photo.id = 'upload'
+  descCard.placeholder = 'Эта карточка...'
 
   saveButton.innerText = 'Сохранить'
-  description.style.resize = 'none'
-  description.innerText = card.parentNode.querySelector('.desc').innerText
+  cancelButton.innerText = 'Отменить'
 
-  //Event listeners
   menuContainer.addEventListener('click', (e) => {
+    descCard.innerText = card.parentNode.querySelector('.desc').innerText
+
+    //Event listeners
+    descCard.style.resize = 'none'
     if (e.target.classList.contains('menuContainer')) {
       menuContainer.remove()
     }
   })
 
-  saveButton.addEventListener('click', () => {
-    saveButton.style.display = 'none'
-    card.parentNode.querySelector('.desc').innerText = description.value
-  })
+  // saveButton.addEventListener('click', () => {
+  //   saveButton.style.display = 'none'
+  // })
+  card.parentNode.querySelector('.desc').innerText = descCard.value
 
-  menuDescription.addEventListener('input', () => {
-    saveButton.style.display = 'block'
-  })
+  // menuDescription.addEventListener('input', () => {
+  //   saveButton.style.display = 'block'
+  // })
 
   menuTitle.addEventListener('keyup', (e) => {
     // Number 13 is the "Enter"
@@ -281,12 +303,25 @@ const showMenu = (card) => (e) => {
   menuTitle.value = card.innerText
 
   //Append
-  menuDescription.append(description)
-  menuDescription.append(saveButton)
-  menu.append(menuTitle)
-  menu.append(menuDescription)
+  btns.append(saveButton)
+  btns.append(cancelButton)
+
+  form.append(menuTitle)
+  form.append(descCard)
+  form.append(deadline)
+  form.append(photo)
+  form.append(btns)
+
+  menu.append(form)
   menuContainer.append(menu)
   app.append(menuContainer)
+
+  // menuContainer.append(menu)
+  // menuDescription.append(saveButton)
+  // menu.append(menuTitle)
+  // menu.append(menuDescription)
+  // menuDescription.append(descCard)
+  // app.append(menuContainer)
 }
 
 const showMenuOnLoad = () => {
@@ -317,8 +352,6 @@ const dragNdrop = (card) => (e) => {
           e.target.parentNode.parentNode.querySelector('.pk').innerText
         curCard = e.target.querySelector('.pk').innerText
         url = `moveCard/${newParent}/${curCard}`
-
-        console.log(`NEW: ${newParent}, CARD: ${curCard}`)
 
         fetch(url, {
           method: 'POST', // or 'PUT'

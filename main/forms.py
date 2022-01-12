@@ -26,7 +26,14 @@ class AddCardForm(forms.ModelForm):
     model = Card
     fields = ['name',]
 
-
+class PopUpForm(forms.ModelForm):
+  name = forms.CharField()
+  content = forms.CharField()
+  deadline = forms.DateField()
+  photo = forms.ImageField()
+  class Meta:
+    model = Card
+    fields = ('name', 'content', 'deadline', 'photo',)
 
 class RegisterUserForm(UserCreationForm):
   username = forms.CharField(widget=forms.TextInput(attrs={'class': 'input-form', 'placeholder': "Имя пользователя"}))
