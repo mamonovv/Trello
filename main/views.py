@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import *
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout, login
 from django.http import HttpResponse, JsonResponse
+from django.forms.models import model_to_dict
 
 
 from .forms import *
@@ -122,7 +122,9 @@ def del_column(request, board_id, column_id):
 
 
 def add_card(request, board_id, column_id):
+  
   if request.method == 'POST':
+    
     form = AddCardForm(request.POST)
     if form.is_valid():
       card = form.save(commit=False)
@@ -157,5 +159,43 @@ def move_card(request, board_id, col_id, card_id):
   return JsonResponse(response)
 
 
-def edit_card():
-  return HttpResponse('This is edit_card')
+def popup_save(request, board_id, card_id):
+  props = ['name', 'content', 'deadline', 'photo']
+
+  card = Card.objects.get(pk=card_id)
+  form = PopUpForm(request.POST, request.FILES, initial=model_to_dict(card))
+
+  if form.is_valid():
+    if form.has_changed():
+      changed = form.changed_data
+      if 'name' in changed:
+        card.name = form.cleaned_data['name']
+      if 'content' in changed:
+        card.content = form.cleaned_data['content']
+      if 'deadline' in changed:
+        card.deadline = form.cleaned_data['deadline']
+      # if 'photo' in changed:
+      #   card.photo = form.cleaned_data['photo']
+      
+    card.save()
+  else:
+    response = {'Errors': form.errors.as_text()}
+    return JsonResponse(response)
+
+  response = {
+    'name': card.name,
+  }
+  return JsonResponse(response)
+
+def get_card(request, board_id, card_id):
+  card = Card.objects.get(pk=card_id)
+
+  response = {
+    'name': card.name,
+    'content': card.content,
+    'deadline': card.deadline,
+    # 'photo': model_to_dict(card.photo),
+  }
+
+  return JsonResponse(response)
+

@@ -56,9 +56,7 @@
     <div class="boards">
       {% for c in columns %}
         {% if c.board == board %}
-        <div class="boards__item">
-          <p class='pk'>{{c.pk}}</p>
-          
+        <div class="boards__item" id='{{c.pk}}-column'>
           <form class="titleDiv">
             {% csrf_token %}
             <input class="title" value={{c.name}}>
@@ -79,8 +77,7 @@
           <div class="list">
             {% for cd in cards %}
               {% if cd.column == c %}
-                <div class="list__item" draggable="true">
-                  <p class="pk">{{cd.pk}}</p>
+                <div class="list__item" draggable="true" id='{{cd.pk}}-card'>
                   <p class="desc none"></p>
                   <div class="cardTitle">{{ cd.name }}</div>
                   <button class="deleteCard">X</button>

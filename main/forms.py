@@ -4,8 +4,6 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
 from .models import *
-
-
 class AddBoardForm(forms.ModelForm):
   name = forms.CharField(widget=forms.TextInput(attrs={'class': 'input-form', 'placeholder': "Название доски доски"}))
   class Meta:
@@ -27,10 +25,10 @@ class AddCardForm(forms.ModelForm):
     fields = ['name',]
 
 class PopUpForm(forms.ModelForm):
-  name = forms.CharField()
-  content = forms.CharField()
-  deadline = forms.DateField()
-  photo = forms.ImageField()
+  name = forms.CharField(widget=forms.TextInput)
+  content = forms.CharField(widget=forms.Textarea, required=False)
+  deadline = forms.DateField(required=False, input_formats=('%d-%m-%Y','%Y-%m-%d'))
+  photo = forms.ImageField(required=False)
   class Meta:
     model = Card
     fields = ('name', 'content', 'deadline', 'photo',)

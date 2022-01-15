@@ -1,6 +1,6 @@
 const button = document.querySelector('.button')
 const app = document.querySelector('.app')
-const csrf = window.csrf_token
+const csrft = window.csrf_token
   .split(' ')[3]
   .split('=')[1]
   .replace('"', '')
@@ -14,6 +14,18 @@ const ajaxSend = async (formData, url) => {
     method: 'POST',
     body: formData,
   })
+
+  if (!fetchResp.ok) {
+    throw new Error(
+      `Ошибка по адресу ${url}, статус ошибки ${fetchResp.status}`
+    )
+    flag = false
+  }
+  return await fetchResp.json()
+}
+
+const ajaxGet = async (url) => {
+  const fetchResp = await fetch(url)
 
   if (!fetchResp.ok) {
     throw new Error(
@@ -52,23 +64,17 @@ const addColumn = () => {
 
         const list = document.createElement('div')
 
-        const pk = document.createElement('p')
-
         //Добавляем в БД-------------
         ajaxSend(formData, url)
           .then((response) => {
-            pk.innerText = response.pk
+            board.id = response.pk + '-column'
           })
           .catch((err) => console.error(err))
 
         //csrf
         csrf.type = 'hidden'
         csrf.name = 'csrfmiddlewaretoken'
-        csrf.value = window.csrf_token
-          .split(' ')[3]
-          .split('=')[1]
-          .replace('"', '')
-          .slice(0, -2)
+        csrf.value = csrft
 
         // Стили
         board.classList.add('boards__item')
@@ -82,7 +88,6 @@ const addColumn = () => {
         list.classList.add('list')
         titleDiv.classList.add('titleDiv')
         deleteButton.classList.add('deleteBoard')
-        pk.classList.add('pk')
 
         //вставляем значения
         addBtn.innerHTML = `
@@ -101,7 +106,6 @@ const addColumn = () => {
         inputForm.appendChild(csrf)
         inputForm.append(cardInput)
         inputForm.append(addBtn)
-        board.append(pk)
         board.append(titleDiv)
         board.append(inputForm)
         board.append(list)
@@ -120,8 +124,8 @@ const addColumn = () => {
 
 const delColumn = (e) => {
   e.preventDefault()
-  let pk = e.target.parentNode.parentNode.querySelector('.pk').innerText
-  let url = 'deleteColumn/' + pk
+  let column_id = parseInt(e.target.parentNode.parentNode.id)
+  let url = 'deleteColumn/' + column_id
 
   fetch(url, {
     method: 'DELETE',
@@ -150,7 +154,8 @@ const addCard = (form) => (e) => {
 
   if (input != '') {
     const formData = new FormData(form)
-    let column_id = e.target.parentNode.querySelector('.pk').innerText
+
+    let column_id = parseInt(e.target.parentNode.id)
     let url = 'addCard/' + column_id
 
     let parent = e.target.parentNode.querySelector('.list')
@@ -159,13 +164,10 @@ const addCard = (form) => (e) => {
     const cardTitle = document.createElement('div')
     const deleteButton = document.createElement('button')
     const description = document.createElement('p')
-    const pk = document.createElement('p')
 
     description.className = 'desc'
     description.innerText = ''
     description.classList.add('none')
-
-    pk.classList.add('pk')
 
     deleteButton.innerText = 'X'
     deleteButton.classList.add('deleteCard')
@@ -179,7 +181,6 @@ const addCard = (form) => (e) => {
     deleteButton.addEventListener('click', delCard)
     cardTitle.addEventListener('click', showMenu(cardTitle))
 
-    newCard.append(pk)
     newCard.append(description)
     newCard.append(cardTitle)
     newCard.append(deleteButton)
@@ -187,9 +188,11 @@ const addCard = (form) => (e) => {
     newCard.addEventListener('dragstart', dragNdrop(newCard))
 
     //Добавляем в БД-------------
+
     ajaxSend(formData, url)
       .then((response) => {
-        pk.innerText = response.pk
+        console.log(response)
+        newCard.id = response.pk + '-card'
         form.reset()
       })
       .catch((err) => console.error(err))
@@ -209,8 +212,8 @@ const addCardOnLoad = () => {
 }
 
 const delCard = (e) => {
-  let pk = e.target.parentNode.querySelector('.pk').innerText
-  let url = 'deleteCard/' + pk
+  let card_id = parseInt(e.target.parentNode.id)
+  let url = 'deleteCard/' + card_id
 
   fetch(url, {
     method: 'DELETE',
@@ -232,11 +235,12 @@ const deleteCardOnLoad = () => {
   })
 }
 
-const showMenu = (card) => (e) => {
+const showMenu = (card) => async (e) => {
   const menuContainer = document.createElement('div')
   const menu = document.createElement('div')
 
   const form = document.createElement('form')
+  const csrf = document.createElement('input')
   const menuTitle = document.createElement('input')
   // const menuDescription = document.createElement('div')
   const descCard = document.createElement('textarea')
@@ -247,9 +251,46 @@ const showMenu = (card) => (e) => {
   const saveButton = document.createElement('button')
   const cancelButton = document.createElement('button')
 
-  //Add types
-  deadline.type = 'datetime-local'
+  let card_id = parseInt(card.parentNode.id)
+
+  //Get запрос
+  let url = 'GetCard/' + card_id
+  ajaxGet(url).then((resp) => {
+    menuTitle.value = resp.name
+    descCard.value = resp.content
+    deadline.value = resp.deadline
+    // photo.value = resp.photo
+  })
+
+  //Add properties
+  descCard.style.resize = 'none'
+  deadline.type = 'date'
+
+  form.enctype = 'multipart/form-data'
+
   photo.type = 'file'
+  photo.id = 'upload'
+
+  cancelButton.type = 'cancel'
+  cancelButton.innerText = 'Отменить'
+
+  saveButton.type = 'submit'
+  saveButton.innerText = 'Сохранить'
+
+  descCard.placeholder = 'Эта карточка...'
+
+  menuTitle.required = 'true'
+
+  //Names
+  menuTitle.name = 'name'
+  descCard.name = 'content'
+  deadline.name = 'deadline'
+  photo.name = 'photo'
+
+  //csrf
+  csrf.type = 'hidden'
+  csrf.name = 'csrfmiddlewaretoken'
+  csrf.value = csrft
 
   //Add class names
   form.className = 'popUpForm'
@@ -265,42 +306,16 @@ const showMenu = (card) => (e) => {
   deadline.className = 'popUpDate'
   photo.className = 'popUpFile'
 
-  photo.id = 'upload'
-  descCard.placeholder = 'Эта карточка...'
-
-  saveButton.innerText = 'Сохранить'
-  cancelButton.innerText = 'Отменить'
-
-  menuContainer.addEventListener('click', (e) => {
-    descCard.innerText = card.parentNode.querySelector('.desc').innerText
-
-    //Event listeners
-    descCard.style.resize = 'none'
-    if (e.target.classList.contains('menuContainer')) {
-      menuContainer.remove()
-    }
-  })
-
-  // saveButton.addEventListener('click', () => {
-  //   saveButton.style.display = 'none'
-  // })
   card.parentNode.querySelector('.desc').innerText = descCard.value
 
-  // menuDescription.addEventListener('input', () => {
-  //   saveButton.style.display = 'block'
+  // menuTitle.addEventListener('keyup', (e) => {
+  //   // Number 13 is the "Enter"
+  //   if (e.keyCode === 13) {
+  //     e.preventDefault()
+  //     card.innerText = menuTitle.value
+  //     menuTitle.blur()
+  //   }
   // })
-
-  menuTitle.addEventListener('keyup', (e) => {
-    // Number 13 is the "Enter"
-    if (e.keyCode === 13) {
-      e.preventDefault()
-      card.innerText = menuTitle.value
-      menuTitle.blur()
-    }
-  })
-
-  //innerText
-  menuTitle.value = card.innerText
 
   //Append
   btns.append(saveButton)
@@ -311,17 +326,25 @@ const showMenu = (card) => (e) => {
   form.append(deadline)
   form.append(photo)
   form.append(btns)
+  form.appendChild(csrf)
 
   menu.append(form)
   menuContainer.append(menu)
   app.append(menuContainer)
 
-  // menuContainer.append(menu)
-  // menuDescription.append(saveButton)
-  // menu.append(menuTitle)
-  // menu.append(menuDescription)
-  // menuDescription.append(descCard)
-  // app.append(menuContainer)
+  //Event listeners
+  menuContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('menuContainer')) {
+      menuContainer.remove()
+    }
+  })
+
+  cancelButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    menuContainer.remove()
+  })
+
+  form.addEventListener('submit', popUpSave(form, card_id, menuContainer, card))
 }
 
 const showMenuOnLoad = () => {
@@ -348,15 +371,14 @@ const dragNdrop = (card) => (e) => {
       setTimeout(() => {
         card.style.display = 'block'
 
-        newParent =
-          e.target.parentNode.parentNode.querySelector('.pk').innerText
-        curCard = e.target.querySelector('.pk').innerText
+        newParent = parseInt(e.target.parentNode.parentNode.id)
+        curCard = parseInt(e.target.id)
         url = `moveCard/${newParent}/${curCard}`
 
         fetch(url, {
           method: 'POST', // or 'PUT'
           headers: {
-            'X-CSRFToken': csrf,
+            'X-CSRFToken': csrft,
             'Content-Type': 'application/json',
           },
         })
@@ -419,6 +441,24 @@ const getCookie = (name) => {
     }
   }
   return cookieValue
+}
+
+const popUpSave = (form, card_id, menuContainer, card) => (e) => {
+  e.preventDefault()
+
+  const formData = new FormData(form)
+
+  let url = 'popUpSave/' + card_id
+
+  ajaxSend(formData, url)
+    .then((response) => {
+      console.log(response)
+      if (flag) card.innerText = response.name
+      else flag = true
+      form.reset()
+      menuContainer.remove()
+    })
+    .catch((err) => console.error(err))
 }
 
 addCardOnLoad()

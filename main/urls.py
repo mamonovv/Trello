@@ -19,8 +19,10 @@ urlpatterns = [
     path('main/board/<int:board_id>/deleteCard/<int:card_id>', del_card, name='del_card'),
     
     path('main/board/<int:board_id>/moveCard/<int:col_id>/<int:card_id>', move_card, name='move_card'),
-    path('main/board/<int:board_id>/editCard', edit_card, name='edit_card'),
     
+    path('main/board/<int:board_id>/popUpSave/<int:card_id>', popup_save, name='popup_save'),
+
+    path('main/board/<int:board_id>/GetCard/<int:card_id>', get_card, name='get_card'),
     
 ]
 

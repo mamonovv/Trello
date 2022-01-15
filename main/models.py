@@ -36,10 +36,10 @@ class Column(models.Model):
 
 class Card(models.Model):
   name = models.CharField(max_length = 255, verbose_name="Название карточки")
-  content = models.TextField(verbose_name="Контент", null=True)
-  deadline = models.DateTimeField(verbose_name="Срок выполнения", null=True)
-  photo = models.ImageField(upload_to = "photos/", verbose_name="Фото", null=True)
-  column = models.ForeignKey(Column, on_delete=models.CASCADE, editable=False, blank=True, verbose_name="В какой колонке")
+  content = models.TextField(verbose_name="Контент", null=True, blank=True)
+  deadline = models.DateTimeField(verbose_name="Срок выполнения", null=True, blank=True)
+  photo = models.ImageField(upload_to = "photos/", verbose_name="Фото", null=True, blank=True)
+  column = models.ForeignKey(Column, on_delete=models.CASCADE, editable=False, verbose_name="В какой колонке")
 
 
   def __str__(self):
