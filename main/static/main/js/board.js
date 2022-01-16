@@ -6,7 +6,6 @@ const csrft = window.csrf_token
   .replace('"', '')
   .slice(0, -2)
 
-let flag = true
 let draggedItem = null
 
 const ajaxSend = async (formData, url) => {
@@ -19,7 +18,6 @@ const ajaxSend = async (formData, url) => {
     throw new Error(
       `Ошибка по адресу ${url}, статус ошибки ${fetchResp.status}`
     )
-    flag = false
   }
   return await fetchResp.json()
 }
@@ -308,15 +306,6 @@ const showMenu = (card) => async (e) => {
 
   card.parentNode.querySelector('.desc').innerText = descCard.value
 
-  // menuTitle.addEventListener('keyup', (e) => {
-  //   // Number 13 is the "Enter"
-  //   if (e.keyCode === 13) {
-  //     e.preventDefault()
-  //     card.innerText = menuTitle.value
-  //     menuTitle.blur()
-  //   }
-  // })
-
   //Append
   btns.append(saveButton)
   btns.append(cancelButton)
@@ -453,12 +442,15 @@ const popUpSave = (form, card_id, menuContainer, card) => (e) => {
   ajaxSend(formData, url)
     .then((response) => {
       console.log(response)
-      if (flag) card.innerText = response.name
-      else flag = true
+      if (!('Errors' in response)) {
+        card.innerText = response.name
+      }
       form.reset()
       menuContainer.remove()
     })
-    .catch((err) => console.error(err))
+    .catch((err) => {
+      console.error(err)
+    })
 }
 
 addCardOnLoad()

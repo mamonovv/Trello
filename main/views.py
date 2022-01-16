@@ -160,6 +160,11 @@ def move_card(request, board_id, col_id, card_id):
 
 
 def popup_save(request, board_id, card_id):
+  # response = {
+  #   'name': request.POST,
+  # }
+  # return JsonResponse(response)
+  
   props = ['name', 'content', 'deadline', 'photo']
 
   card = Card.objects.get(pk=card_id)

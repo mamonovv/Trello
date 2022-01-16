@@ -263,7 +263,8 @@ a.name:hover {
 }
 
 .popUpArea:focus,
-.menuTitle:focus {
+.menuTitle:focus,
+.popUpDate:focus {
   background-color: white;
   outline: 1px solid rgba(92, 87, 87, 0.45);
   color: black;
@@ -273,7 +274,7 @@ a.name:hover {
   margin-bottom: 1em;
   line-height: 1.5em;
 
-  color: gray;
+  color: rgb(87, 85, 85);
   width: 100%;
   height: 5em;
   padding: 0.5em;
@@ -289,6 +290,7 @@ a.name:hover {
   display: flex;
   justify-self: start;
   align-items: center;
+  margin-bottom: 0.5em;
 }
 
 .popUpDate,
@@ -301,6 +303,7 @@ a.name:hover {
   height: 30px;
   border: 1px solid rgba(92, 87, 87, 0.45);
   padding-left: 7px;
+  display: block;
 }
 
 .btn-cancel,
@@ -430,11 +433,15 @@ a.name:hover {
   width: 500px;
   min-height: 300px;
   margin: auto;
-  padding: 1em;
+  padding: 1.2em;
   border-radius: 4px;
 }
 
 .pk,
 .none {
   display: none;
+}
+
+.block {
+  display: block;
 }

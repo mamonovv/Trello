@@ -27,7 +27,7 @@ class AddCardForm(forms.ModelForm):
 class PopUpForm(forms.ModelForm):
   name = forms.CharField(widget=forms.TextInput)
   content = forms.CharField(widget=forms.Textarea, required=False)
-  deadline = forms.DateField(required=False, input_formats=('%d-%m-%Y','%Y-%m-%d'))
+  deadline = forms.DateField(required=False, input_formats = ['%Y-%m-%d'])
   photo = forms.ImageField(required=False)
   class Meta:
     model = Card
