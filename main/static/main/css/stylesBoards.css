@@ -286,6 +286,17 @@ a.name:hover {
   background: none;
 }
 
+.photoPopUp {
+  max-width: 300px;
+  max-height: 300px;
+  display: block;
+  border-radius: 5px;
+}
+
+.photoDiv {
+  margin-bottom: 1em;
+}
+
 .popUpBtns {
   display: flex;
   justify-self: start;

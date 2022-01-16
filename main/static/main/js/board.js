@@ -243,7 +243,10 @@ const showMenu = (card) => async (e) => {
   // const menuDescription = document.createElement('div')
   const descCard = document.createElement('textarea')
   const deadline = document.createElement('input')
+
+  const photoDiv = document.createElement('div')
   const photo = document.createElement('input')
+  const photoImg = document.createElement('img')
 
   const btns = document.createElement('div')
   const saveButton = document.createElement('button')
@@ -251,13 +254,19 @@ const showMenu = (card) => async (e) => {
 
   let card_id = parseInt(card.parentNode.id)
 
+  let photo_url = null
+
   //Get запрос
   let url = 'GetCard/' + card_id
   ajaxGet(url).then((resp) => {
+    console.log(resp)
     menuTitle.value = resp.name
     descCard.value = resp.content
     deadline.value = resp.deadline
-    // photo.value = resp.photo
+
+    if (resp.photo) {
+      photoImg.src = resp.photo
+    }
   })
 
   //Add properties
@@ -301,6 +310,9 @@ const showMenu = (card) => async (e) => {
   descCard.className = 'popUpArea'
   btns.className = 'popUpBtns'
 
+  photoImg.className = 'photoPopUp'
+  photoDiv.className = 'photoDiv'
+
   deadline.className = 'popUpDate'
   photo.className = 'popUpFile'
 
@@ -313,7 +325,9 @@ const showMenu = (card) => async (e) => {
   form.append(menuTitle)
   form.append(descCard)
   form.append(deadline)
-  form.append(photo)
+  photoDiv.append(photo)
+  photoDiv.append(photoImg)
+  form.append(photoDiv)
   form.append(btns)
   form.appendChild(csrf)
 

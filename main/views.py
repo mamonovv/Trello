@@ -168,21 +168,24 @@ def popup_save(request, board_id, card_id):
   props = ['name', 'content', 'deadline', 'photo']
 
   card = Card.objects.get(pk=card_id)
-  form = PopUpForm(request.POST, request.FILES, initial=model_to_dict(card))
+  form = PopUpForm(request.POST, request.FILES, instance=card, initial=model_to_dict(card))
 
   if form.is_valid():
-    if form.has_changed():
-      changed = form.changed_data
-      if 'name' in changed:
-        card.name = form.cleaned_data['name']
-      if 'content' in changed:
-        card.content = form.cleaned_data['content']
-      if 'deadline' in changed:
-        card.deadline = form.cleaned_data['deadline']
-      # if 'photo' in changed:
-      #   card.photo = form.cleaned_data['photo']
+    form.save()
+
+  # if form.is_valid():
+  #   if form.has_changed():
+  #     changed = form.changed_data
+  #     if 'name' in changed:
+  #       card.name = form.cleaned_data['name']
+  #     if 'content' in changed:
+  #       card.content = form.cleaned_data['content']
+  #     if 'deadline' in changed:
+  #       card.deadline = form.cleaned_data['deadline']
+  #     if 'photo' in changed:
+  #       card.photo = form.instance
       
-    card.save()
+    # card.save()
   else:
     response = {'Errors': form.errors.as_text()}
     return JsonResponse(response)
@@ -195,11 +198,16 @@ def popup_save(request, board_id, card_id):
 def get_card(request, board_id, card_id):
   card = Card.objects.get(pk=card_id)
 
+  if card.photo:
+    photo = card.photo.url
+  else:
+    photo = None
+
   response = {
     'name': card.name,
     'content': card.content,
     'deadline': card.deadline,
-    # 'photo': model_to_dict(card.photo),
+    'photo': photo,
   }
 
   return JsonResponse(response)
