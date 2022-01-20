@@ -59,7 +59,7 @@
         <div class="boards__item" id='{{c.pk}}-column'>
           <form class="titleDiv">
             {% csrf_token %}
-            <input class="title" value={{c.name}}>
+            <input disabled class="title" value={{c.name}}>
             <button type="submit" class="deleteBoard">X</button>
           </form>
 

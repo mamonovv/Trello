@@ -69,6 +69,8 @@ const addColumn = () => {
           })
           .catch((err) => console.error(err))
 
+        //props
+        titleInput.disabled = true
         //csrf
         csrf.type = 'hidden'
         csrf.name = 'csrfmiddlewaretoken'
