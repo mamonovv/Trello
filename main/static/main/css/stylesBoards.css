@@ -56,11 +56,13 @@ main {
 .log {
   color: #0065ff;
   margin-right: 1em;
+  transition: 0.3s;
 }
 
 .log:hover {
   color: #6798e2;
   text-decoration: underline;
+  transition: 0.3s;
 }
 
 .reg {
@@ -69,11 +71,13 @@ main {
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #0065ff;
+  transition: 0.3s;
 }
 
 .reg:hover {
   background-color: #ece9ff;
   color: #0065ff;
+  transition: 0.3s;
 }
 
 .logo {
@@ -96,6 +100,7 @@ main {
 
 .button:hover {
   background-color: #2461bd;
+  transition: 0.3s;
 }
 
 .form-errors {
@@ -179,6 +184,12 @@ a.name:hover {
   cursor: pointer;
   margin-left: 0.2em;
   border: none;
+  transition: 0.3s;
+}
+
+.add__btn:hover {
+  transition: 0.3s;
+  background: rgba(155, 155, 155, 0.651);
 }
 
 .add__btn span {
@@ -188,6 +199,7 @@ a.name:hover {
 }
 
 .button {
+  transition: 0.3s;
   padding: 1em;
   text-decoration: none;
   font-weight: 700;
@@ -329,18 +341,22 @@ a.name:hover {
 .btn-save {
   background-color: #5aac44;
   margin-right: 0.5em;
+  transition: 0.3s;
 }
 
 .btn-cancel {
+  transition: 0.3s;
   background-color: #ca2c2c;
 }
 
 .btn-cancel:hover {
+  transition: 0.3s;
   background-color: #8d1b1b;
 }
 
 .btn-save:hover {
   background-color: #42a826;
+  transition: 0.3s;
 }
 
 .list__item {
@@ -356,6 +372,7 @@ a.name:hover {
   font-weight: 500;
   outline: none;
   position: relative;
+  transition: 0.3s;
 }
 
 .list__item button {
@@ -369,16 +386,19 @@ a.name:hover {
   top: 20%;
   right: 0;
   margin-right: 5px;
+  transition: 0.3s;
 }
 
 .list__item:hover button {
   visibility: visible;
+  transition: 0.3s;
 }
 
 .list__item button:hover {
   background-color: rgba(116, 116, 116, 0.384);
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .title {
@@ -399,9 +419,12 @@ a.name:hover {
 
 .titleDiv {
   position: relative;
+  transition: 0.3s;
 }
 
 .titleDiv button {
+  width: 1.2rem;
+
   visibility: hidden;
   height: max-content;
   color: black;
@@ -414,16 +437,19 @@ a.name:hover {
   margin-right: 5px;
   background: white;
   border-radius: 5px;
+  transition: 0.3s;
 }
 
 .titleDiv:hover button {
   visibility: visible;
+  transition: 0.3s;
 }
 
 .titleDiv button:hover {
   background-color: rgba(116, 116, 116, 0.384);
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .menuContainer {
