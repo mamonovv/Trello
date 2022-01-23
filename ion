@@ -1,0 +1,283 @@
+[33mcommit 01d88360f5024cc8bf45647ff80b2e83735a26f7[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 23 20:01:04 2022 +0700
+
+    Add hover for buttons
+
+[33mcommit 8b310c5a2dc0ce3d84f0f6cc7eab3bba57470c1c[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Thu Jan 20 15:03:22 2022 +0700
+
+    Disabled edit for title columns
+
+[33mcommit 4866b807b93404880731f27c9d6c45e3b007304b[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 16 22:01:45 2022 +0700
+
+    Add an photo to popUps
+
+[33mcommit c150910021df3633d1bb60c992423ae81e5b67a6[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 16 20:21:10 2022 +0700
+
+    Fix date in popUps
+
+[33mcommit 32f204de4789b3b2915e778028e74317cc742a39[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 16 01:53:21 2022 +0700
+
+    Fix popUps, without send data and photos
+
+[33mcommit 6ad4d0f5dbe9699cddd34e9f31c1e7855de5406e[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Jan 12 20:46:24 2022 +0700
+
+    Add styles for popUps
+
+[33mcommit 4a06641b7db273028c57b5a7a5ba9591b8948be5[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Tue Jan 11 02:51:09 2022 +0700
+
+    Little fix popup
+
+[33mcommit 3f30c6388b191afb6daa13c0146e2bd658af65b2[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Tue Jan 11 02:43:01 2022 +0700
+
+    Fix bug when popup doesnt work
+
+[33mcommit c8b5d4b2864a5e74c41fcb36a4bfd079a35aca7b[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Tue Jan 11 02:20:28 2022 +0700
+
+    Fix multiply fetch on move cards
+
+[33mcommit d504c30093aa5eae81a3d7246e5de42ce1ff8b0d[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Tue Jan 11 01:59:26 2022 +0700
+
+    Fix bug with multiply ajax for del/add cards columns + change function styles
+
+[33mcommit a8afe6e8deaeb055a1d46813d807250bc1f5de1d[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Mon Jan 10 01:28:49 2022 +0700
+
+    We have fetch move cards, but addColumns bag again here, a lot of responses
+
+[33mcommit d76a2178b9a9cb055da8205bc8ad52e0fbb0da1c[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 9 23:17:57 2022 +0700
+
+    Fix bag with add new cards
+
+[33mcommit 3cda4c860cd85d62348a43cdfcbc90793fbad911[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 9 20:43:46 2022 +0700
+
+    Fix csrf token, but old columns dont like new
+
+[33mcommit 9b260ab9f94a4de9ccd20e6f6f8aa92d469fc0b4[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 9 19:55:12 2022 +0700
+
+    Fix bug with popup on cards
+
+[33mcommit 8a5e4be8683d7cbdb5c8e6a5b07777ec121847f4[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 9 19:41:34 2022 +0700
+
+    Add an fetch card del
+
+[33mcommit c2801374019b8652a3cbea9df3844a870d46ebc2[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 9 19:26:31 2022 +0700
+
+    Add an fetch card add:
+
+[33mcommit c3e35279e5b5a6fe729b6cbe59107c12d7c99251[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 9 17:33:04 2022 +0700
+
+    Add an fetch delete cols
+
+[33mcommit be4ac32cdb87a8261ad83b1917ae7c62be8f9c50[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 9 16:10:19 2022 +0700
+
+    Add a fetch for columns add
+
+[33mcommit f96e57fc63f5d7a515369dba40dbc80cd308eecc[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Jan 9 14:52:44 2022 +0700
+
+    Version before try fetch
+
+[33mcommit 9defdd84803e34e9f12b7be23adcac9050c61b37[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 29 17:36:43 2021 +0700
+
+    fix registration button2
+
+[33mcommit 6474838411416ae227cf5d311afd7da6c203a67e[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 29 17:35:04 2021 +0700
+
+    fix registration button2
+
+[33mcommit f4f6f28b56535fa83c6345b870a6a3b34ba91606[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 29 17:34:34 2021 +0700
+
+    fix registration button
+
+[33mcommit 8dd40a004ab9a4d942c0d7a85c1869601a9568c4[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 29 17:00:12 2021 +0700
+
+    Add an delete btn for boards
+
+[33mcommit b16220f569994aa2af03e81c199682743503d6c9[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 29 16:36:06 2021 +0700
+
+    Add an deleting a card
+
+[33mcommit 4f56fc087f82c3f0b02774f56ca3540eeb2bb923[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 29 15:46:40 2021 +0700
+
+    Fix an multiply add in cards
+
+[33mcommit 9ff43deab0e0b7c76ea66437b0bf103168bf2860[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 29 15:38:42 2021 +0700
+
+    add an popup for card
+
+[33mcommit 158c8f84a18000a88cd3feaeff688a9213f096d8[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 29 14:54:04 2021 +0700
+
+    Fix a dragNdrop - now it  works correctly
+
+[33mcommit b3296c4e3502a5ad2207db5b30bbd123508523c2[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Mon Dec 27 00:42:22 2021 +0700
+
+    Add a boards by functions, without dragNdrop
+
+[33mcommit 022828cadd7bd7c84474ee56930246a58c80baf6[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Dec 26 20:24:14 2021 +0700
+
+    Add a boards, without dragNdrop
+
+[33mcommit 6706cacf0fdce6df0f385522d2a7c381e1c2db77[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sat Dec 25 15:14:11 2021 +0700
+
+    First try to create trello board
+
+[33mcommit 2d61814fade49266aa3ceadb8cffbe4cf50f86a4[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Dec 19 21:47:29 2021 +0700
+
+    Add a title on Board Page
+
+[33mcommit d6f1afd3a0fa1ab66021b2fe28e83cf1264b4dfc[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Dec 19 19:50:06 2021 +0700
+
+    start create an Board page
+
+[33mcommit 3c57ae8fea412f2cd1b1ecfb7ffc519b2351a112[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Dec 19 19:13:27 2021 +0700
+
+    fix new_board form
+
+[33mcommit 982f5c743b28d4e4423648fadd93f27d13fc7096[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Dec 19 18:38:47 2021 +0700
+
+    Add and end a new_board page, end a main page, create auto save for boards
+
+[33mcommit d03fbecf1e9e55d593a3d4eeadc213fb15d74b13[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sat Dec 18 02:53:13 2021 +0700
+
+    Add New Board button + page, fix some errors
+
+[33mcommit 142893b4338e5c73d56eb88a1bb73ba61c810594[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sat Dec 18 02:05:32 2021 +0700
+
+    Fix some sizes
+
+[33mcommit df5009e9301b0eab49c25237bcad0f65b733142b[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sat Dec 18 01:56:37 2021 +0700
+
+    Add a board cards on main
+
+[33mcommit 4c3796f91920935f589ce0145f0d53e10ff48bc6[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 15 14:14:50 2021 +0700
+
+    Fix urls on landing for auth users
+
+[33mcommit a6685bb057cff899b2cac54440d533ce111370e4[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 15 14:10:44 2021 +0700
+
+    Add an mainpage and all urls
+
+[33mcommit 7c30ec88af2491a192486a2e759c268dbb509279[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 15 03:53:54 2021 +0700
+
+    Add display of authorized users
+
+[33mcommit e307c48fe70016ba4b49011afe552404c9bc3fdc[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Wed Dec 15 03:31:22 2021 +0700
+
+    Add registration/login on site
+
+[33mcommit 495b9930ce5eaf6d30ef7902431dcb80e940c98d[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Sun Dec 12 19:14:54 2021 +0300
+
+    Try to add register on site
+
+[33mcommit 3298ccc80f224fa684470cc289ae870d0710bd94[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Thu Dec 9 23:58:36 2021 +0300
+
+    Add a hover for log/reg
+
+[33mcommit 97f9b23c83ad97aa2b36ac0ca9e47b05b4d50ebe[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Thu Dec 9 23:39:01 2021 +0300
+
+    fix url trello
+
+[33mcommit 0031fb7d2c70af10821468e5f0d2554133e587d5[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Thu Dec 9 23:37:20 2021 +0300
+
+    fix url trello
+
+[33mcommit 32721233499a34a6671814e7e952271f5de1912b[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Thu Dec 9 23:30:39 2021 +0300
+
+    Heroku update
+
+[33mcommit eca0e739bb17fb70e8f322bcd28a882b7a0afb1d[m
+Author: Vlad Mamonov <mmvvlad@gmail.com>
+Date:   Thu Dec 9 23:26:22 2021 +0300
+
+    heroku set
+
+[33mcommit 1a2d1e23905c60734d094f9
