@@ -1,41 +1,55 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ request.user.username }}</title>
-  <link rel="stylesheet" href="{% static 'main/css/stylesMain.css' %}" />
-  <link
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ request.user.username }}</title>
+    <link rel="stylesheet" href="{% static 'main/css/stylesMain.css' %}" />
+    <link
       rel="shortcut icon"
       href="{% static 'main/images/icon.ico' %}"
       type="image/x-icon"
     />
-</head>
-<body>
-  <header>
-    <div class="header-item">
-      <a href="{% url 'home' %}">
-        <img
-          src="{% static 'main/images/logo.png' %}"
-          alt="logo"
-          class="logo"
-        />
-      </a>
-    </div>
+  </head>
+  <body>
+    <header>
+      <div class="header-item">
+        <a href="{% url 'home' %}">
+          <img
+            src="{% static 'main/images/logo.png' %}"
+            alt="logo"
+            class="logo"
+          />
+        </a>
+      </div>
 
-    <div class="header-item">
-      {% if  request.path == '/main/'%}
-      <span class="name">{{ user.username }}</span> | <a class="log" href="{% url 'logout' %}">Выйти</a>
-      {% else %}
-      <a class="name" href="{% url 'main' %}">{{ user.username }}</a> | <a class="log" href="{% url 'logout' %}">Выйти</a>
-      {% endif %}
-    </div>
-  </header>
-    {% block content %}
-    {% endblock %}
+      <div class="header-item">
+        {% if request.path == '/main/'%}
+        <div class="dropdown">
+          <button class="dropbtn">{{ user.username }}</button>
+          <div class="dropdown-content">
+            <a class="log" href="{% url 'logout' %}">Выйти</a>
+          </div>
+        </div>
+
+        <!-- <span class="name">{{ user.username }}</span> | <a class="log" href="{% url 'logout' %}">Выйти</a> -->
+        {% else %}
+        <div class="dropdown">
+          <button class="dropbtn">{{ user.username }}</button>
+          <div class="dropdown-content">
+            <a class="name" href="{% url 'main' %}">Доски</a>
+            <a class="log" href="{% url 'logout' %}">Выйти</a>
+          </div>
+        </div>
+
+        <a class="name" href="{% url 'main' %}">{{ user.username }}</a> |
+        <a class="log" href="{% url 'logout' %}">Выйти</a>
+        {% endif %}
+      </div>
+    </header>
+    {% block content %} {% endblock %}
   </body>
 </html>

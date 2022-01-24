@@ -38,12 +38,11 @@ main {
 .log,
 .reg {
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .log {
   color: #0065ff;
-  margin-right: 1em;
 }
 
 .log:hover {
@@ -149,4 +148,53 @@ main {
   background-color: #0065ff;
   color: #ece9ff;
   transition: 0.3s background-color;
+}
+
+/* --------------------------Dropdown menu */
+
+.dropbtn {
+  color: black;
+  padding: 0.5em;
+  font-size: 16px;
+  border: 1px solid #a7bdff;
+  border-radius: 5px;
+  background: none;
+  transition: 0.3s;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  width: 100%;
+  display: none;
+  position: absolute;
+  right: 0;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* .dropdown-content a:hover {
+} */
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropdown:hover .dropbtn {
+  background: #2461bd;
+  color: #ece9ff;
+  transition: 0.3s;
 }
