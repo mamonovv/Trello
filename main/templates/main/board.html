@@ -89,6 +89,25 @@
         {% endif %}
       {% endfor %}
     </div>
+
+    <div class="menuContainer hidden">
+      <div class="menu">
+        <form enctype="multipart/form-data"enctype="multipart/form-data" class="popUpForm">
+          <input class="menuTitle" type="text" required name="name">
+          <textarea name="content" placeholder="Эта карточка..." class="popUpArea"></textarea>
+          <input type="date" name="deadline" class="popUpDate">
+          <div class="photoDiv">
+            <input type="file" name="photo" class="popUpFile">
+            <img class="photoPopUp">
+          </div>
+          <div class="popUpBtns">
+            <button type="submit" class="btn-save">Сохранить</button>
+            <button type="cancel" class="btn-cancel">Отменить</button>
+          </div>
+          {% csrf_token %}
+        </form>
+      </div>
+    </div>
   </div>
   <script>
     window.csrf_token = '{% csrf_token %}';

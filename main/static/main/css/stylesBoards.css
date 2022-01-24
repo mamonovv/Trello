@@ -286,6 +286,7 @@ a.name:hover {
   margin-bottom: 1em;
   line-height: 1.5em;
 
+  resize: none;
   color: rgb(87, 85, 85);
   width: 100%;
   height: 5em;
@@ -481,4 +482,8 @@ a.name:hover {
 
 .block {
   display: block;
+}
+
+.hidden {
+  display: none;
 }

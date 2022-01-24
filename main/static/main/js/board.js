@@ -71,6 +71,7 @@ const addColumn = () => {
 
         //props
         titleInput.disabled = true
+
         //csrf
         csrf.type = 'hidden'
         csrf.name = 'csrfmiddlewaretoken'
@@ -236,32 +237,28 @@ const deleteCardOnLoad = () => {
 }
 
 const showMenu = (card) => async (e) => {
-  const menuContainer = document.createElement('div')
-  const menu = document.createElement('div')
-
-  const form = document.createElement('form')
-  const csrf = document.createElement('input')
-  const menuTitle = document.createElement('input')
-  // const menuDescription = document.createElement('div')
-  const descCard = document.createElement('textarea')
-  const deadline = document.createElement('input')
-
-  const photoDiv = document.createElement('div')
-  const photo = document.createElement('input')
-  const photoImg = document.createElement('img')
-
-  const btns = document.createElement('div')
-  const saveButton = document.createElement('button')
-  const cancelButton = document.createElement('button')
-
   let card_id = parseInt(card.parentNode.id)
 
-  let photo_url = null
+  const menuContainer = document.querySelector('.menuContainer')
+  const form = menuContainer.querySelector('.popUpForm')
+  const menuTitle = form.querySelector('.menuTitle')
+  const descCard = form.querySelector('.popUpArea')
+  const deadline = form.querySelector('.popUpDate')
+  const photoImg = form.querySelector('.photoPopUp')
+  const cancelButton = form.querySelector('.btn-cancel')
+
+  function clean() {
+    photoImg.removeAttribute('src')
+    menuTitle.value = null
+    descCard.value = null
+    deadline.value = null
+  }
+
+  clean()
 
   //Get запрос
   let url = 'GetCard/' + card_id
   ajaxGet(url).then((resp) => {
-    console.log(resp)
     menuTitle.value = resp.name
     descCard.value = resp.content
     deadline.value = resp.deadline
@@ -271,86 +268,143 @@ const showMenu = (card) => async (e) => {
     }
   })
 
-  //Add properties
-  descCard.style.resize = 'none'
-  deadline.type = 'date'
-
-  form.enctype = 'multipart/form-data'
-
-  photo.type = 'file'
-  photo.id = 'upload'
-
-  cancelButton.type = 'cancel'
-  cancelButton.innerText = 'Отменить'
-
-  saveButton.type = 'submit'
-  saveButton.innerText = 'Сохранить'
-
-  descCard.placeholder = 'Эта карточка...'
-
-  menuTitle.required = 'true'
-
-  //Names
-  menuTitle.name = 'name'
-  descCard.name = 'content'
-  deadline.name = 'deadline'
-  photo.name = 'photo'
-
-  //csrf
-  csrf.type = 'hidden'
-  csrf.name = 'csrfmiddlewaretoken'
-  csrf.value = csrft
-
-  //Add class names
-  form.className = 'popUpForm'
-  menu.className = 'menu'
-  menuContainer.className = 'menuContainer'
-  menuTitle.className = 'menuTitle'
-  // menuDescription.className = 'menuDescription'
-  saveButton.className = 'btn-save'
-  cancelButton.className = 'btn-cancel'
-  descCard.className = 'popUpArea'
-  btns.className = 'popUpBtns'
-
-  photoImg.className = 'photoPopUp'
-  photoDiv.className = 'photoDiv'
-
-  deadline.className = 'popUpDate'
-  photo.className = 'popUpFile'
+  menuContainer.classList.toggle('hidden')
 
   card.parentNode.querySelector('.desc').innerText = descCard.value
 
-  //Append
-  btns.append(saveButton)
-  btns.append(cancelButton)
-
-  form.append(menuTitle)
-  form.append(descCard)
-  form.append(deadline)
-  photoDiv.append(photo)
-  photoDiv.append(photoImg)
-  form.append(photoDiv)
-  form.append(btns)
-  form.appendChild(csrf)
-
-  menu.append(form)
-  menuContainer.append(menu)
-  app.append(menuContainer)
-
   //Event listeners
-  menuContainer.addEventListener('click', (e) => {
+  menuContainer.onclick = (e) => {
     if (e.target.classList.contains('menuContainer')) {
-      menuContainer.remove()
+      // menuContainer.remove()
+      menuContainer.classList.toggle('hidden')
     }
-  })
+  }
 
-  cancelButton.addEventListener('click', (e) => {
+  cancelButton.onclick = (e) => {
     e.preventDefault()
-    menuContainer.remove()
-  })
+    // menuContainer.remove()
+    menuContainer.classList.toggle('hidden')
+  }
 
-  form.addEventListener('submit', popUpSave(form, card_id, menuContainer, card))
+  form.onsubmit = popUpSave(form, card_id, menuContainer, card)
 }
+
+// const showMenu = (card) => async (e) => {
+//   const menuContainer = document.createElement('div')
+//   const menu = document.createElement('div')
+
+//   const form = document.createElement('form')
+//   const csrf = document.createElement('input')
+//   const menuTitle = document.createElement('input')
+//   // const menuDescription = document.createElement('div')
+//   const descCard = document.createElement('textarea')
+//   const deadline = document.createElement('input')
+
+//   const photoDiv = document.createElement('div')
+//   const photo = document.createElement('input')
+//   const photoImg = document.createElement('img')
+
+//   const btns = document.createElement('div')
+//   const saveButton = document.createElement('button')
+//   const cancelButton = document.createElement('button')
+
+//   let card_id = parseInt(card.parentNode.id)
+
+//   let photo_url = null
+
+//   //Get запрос
+//   let url = 'GetCard/' + card_id
+//   ajaxGet(url).then((resp) => {
+//     console.log(resp)
+//     menuTitle.value = resp.name
+//     descCard.value = resp.content
+//     deadline.value = resp.deadline
+
+//     if (resp.photo) {
+//       photoImg.src = resp.photo
+//     }
+//   })
+
+//   //Add properties
+//   descCard.style.resize = 'none'
+//   deadline.type = 'date'
+
+//   form.enctype = 'multipart/form-data'
+
+//   photo.type = 'file'
+//   photo.id = 'upload'
+
+//   cancelButton.type = 'cancel'
+//   cancelButton.innerText = 'Отменить'
+
+//   saveButton.type = 'submit'
+//   saveButton.innerText = 'Сохранить'
+
+//   descCard.placeholder = 'Эта карточка...'
+
+//   menuTitle.required = 'true'
+
+//   //Names
+//   menuTitle.name = 'name'
+//   descCard.name = 'content'
+//   deadline.name = 'deadline'
+//   photo.name = 'photo'
+
+//   //csrf
+//   csrf.type = 'hidden'
+//   csrf.name = 'csrfmiddlewaretoken'
+//   csrf.value = csrft
+
+//   //Add class names
+//   form.className = 'popUpForm'
+//   menu.className = 'menu'
+//   menuContainer.className = 'menuContainer'
+//   menuTitle.className = 'menuTitle'
+//   // menuDescription.className = 'menuDescription'
+//   saveButton.className = 'btn-save'
+//   cancelButton.className = 'btn-cancel'
+//   descCard.className = 'popUpArea'
+//   btns.className = 'popUpBtns'
+
+//   photoImg.className = 'photoPopUp'
+//   photoDiv.className = 'photoDiv'
+
+//   deadline.className = 'popUpDate'
+//   photo.className = 'popUpFile'
+
+//   card.parentNode.querySelector('.desc').innerText = descCard.value
+
+//   //Append
+//   btns.append(saveButton)
+//   btns.append(cancelButton)
+
+//   form.append(menuTitle)
+//   form.append(descCard)
+//   form.append(deadline)
+//   photoDiv.append(photo)
+//   photoDiv.append(photoImg)
+//   form.append(photoDiv)
+//   form.append(btns)
+//   form.appendChild(csrf)
+
+//   menu.append(form)
+//   menuContainer.append(menu)
+//   app.append(menuContainer)
+
+//   //Event listeners
+//   menuContainer.addEventListener('click', (e) => {
+//     if (e.target.classList.contains('menuContainer')) {
+//       menuContainer.remove()
+//     }
+//   })
+
+//   cancelButton.addEventListener('click', (e) => {
+//     e.preventDefault()
+//     menuContainer.remove()
+//   })
+
+//   form.addEventListener('submit', popUpSave(form, card_id, menuContainer, card))
+// }
 
 const showMenuOnLoad = () => {
   const cards = document.querySelectorAll('.cardTitle')
@@ -462,7 +516,8 @@ const popUpSave = (form, card_id, menuContainer, card) => (e) => {
         card.innerText = response.name
       }
       form.reset()
-      menuContainer.remove()
+      // menuContainer.remove()
+      menuContainer.classList.toggle('hidden')
     })
     .catch((err) => {
       console.error(err)
