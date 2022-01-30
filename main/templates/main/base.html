@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ request.user.username }}</title>
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'main/css/stylesMain.css' %}" />
     <link
       rel="shortcut icon"
@@ -16,40 +17,44 @@
   </head>
   <body>
     <header>
-      <div class="header-item">
+      <div class="navbar p-3">
         <a href="{% url 'home' %}">
           <img
             src="{% static 'main/images/logo.png' %}"
             alt="logo"
-            class="logo"
+            class="d-block float-left logo"
           />
         </a>
-      </div>
-
-      <div class="header-item">
-        {% if request.path == '/main/'%}
-        <div class="dropdown">
-          <button class="dropbtn">{{ user.username }}</button>
-          <div class="dropdown-content">
-            <a class="log" href="{% url 'logout' %}">Выйти</a>
-          </div>
+        {% if request.user.is_authenticated %}
+        <div class="btn-group float-right mr-3">
+          <button
+            type="button"
+            class="btn btn-primary dropdown-toggle dropbtn"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ user.username }}
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="{% url 'main' %}">Доски</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+            </li>
+          </ul>
         </div>
-
-        <!-- <span class="name">{{ user.username }}</span> | <a class="log" href="{% url 'logout' %}">Выйти</a> -->
         {% else %}
-        <div class="dropdown">
-          <button class="dropbtn">{{ user.username }}</button>
-          <div class="dropdown-content">
-            <a class="name" href="{% url 'main' %}">Доски</a>
-            <a class="log" href="{% url 'logout' %}">Выйти</a>
-          </div>
+        <div class="justify-content-end">
+          <a class="log mx-2" href="{% url 'login' %}">Войти</a>
+          <a class="btn btn-primary reg" href="{% url 'register' %}"
+            >Регистрация</a
+          >
         </div>
-
-        <a class="name" href="{% url 'main' %}">{{ user.username }}</a> |
-        <a class="log" href="{% url 'logout' %}">Выйти</a>
         {% endif %}
       </div>
     </header>
     {% block content %} {% endblock %}
+    <script type="application/javascript" src={% static 'main/js/bootstrap.bundle.min.js' %}></script>
   </body>
 </html>

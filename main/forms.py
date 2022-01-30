@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 
 from .models import *
 class AddBoardForm(forms.ModelForm):
-  name = forms.CharField(widget=forms.TextInput(attrs={'class': 'input-form', 'placeholder': "Название доски доски"}))
+  name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control mmv-input', 'placeholder': "Название доски доски"}))
   class Meta:
     model = Board
     fields = ['name',]

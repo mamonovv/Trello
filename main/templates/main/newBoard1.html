@@ -1,0 +1,23 @@
+{% extends 'main/base.html'%} {% block content %}
+
+<main>
+  <section>
+    <div class="container">
+      <div class="container-title center">
+        <h2>Создать новую доску:</h2>
+      </div>
+      <div class="container-item">
+        <form method="post">
+          {% csrf_token %} {% for f in form %}
+          <p>{{f}}</p>
+
+          <div class="form-errors">{{ f.errors }}</div>
+          {% endfor %}
+          <button type="submit" class="reg">{{cardBtn}}</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

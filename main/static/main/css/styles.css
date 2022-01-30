@@ -63,3 +63,7 @@ p {
   color: #6798e2;
   text-decoration: underline;
 }
+
+.dropdown-menu {
+  width: 50px;
+}
