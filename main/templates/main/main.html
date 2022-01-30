@@ -19,28 +19,29 @@
 
     <div class="container mt-5">
       <div class="row row-cols-auto text-center">
-        {% for b in boards %} {% if b.user == request.user %}
-        <div
-          class="mmv-col col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mr-3 mb-3"
-        >
-          <div id="{{b.pk}}" class="card p-0 mmv-card">
-            <img
-              src="{% static 'main/images/card.png' %}"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title text-center">{{b.name}}</h5>
+          {% for b in boards %} {% if b.user == request.user %}
+          <div
+            class="mmv-col col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mr-3 mb-3"
+          >
+            <div id="{{b.pk}}" class="card p-0 mmv-card">
+              <img
+                src="{% static 'main/images/card.png' %}"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title text-center">{{b.name}}</h5>
 
-              <a href="{{ b.get_absolute_url }}" class="btn btn-sm btn-primary"
-                >Открыть</a
-              >
-              <button class="btn btn-sm btn-danger btn-del">Удалить</button>
+                <a href="{{ b.get_absolute_url }}" class="btn btn-sm btn-primary"
+                  >Открыть</a
+                >
+                <button class="btn btn-sm btn-danger btn-del">Удалить</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        {% endif %} {% endfor %}
+          {% endif %} {% endfor %}
+        
       </div>
     </div>
   </section>

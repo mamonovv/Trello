@@ -82,7 +82,6 @@ body {
   flex-direction: column;
   align-self: baseline;
   max-width: 280px;
-  width: 100%;
   background-color: rgb(189, 206, 255);
   margin: 0 15px;
   padding: 10px;
