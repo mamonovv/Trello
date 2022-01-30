@@ -91,3 +91,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.btn-del {
+  background-color: #ca2c2c;
+}

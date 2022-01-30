@@ -89,6 +89,7 @@ const addColumn = () => {
         list.classList.add('list')
         titleDiv.classList.add('titleDiv')
         deleteButton.classList.add('deleteBoard')
+        deleteButton.classList.add('btn-close')
 
         //вставляем значения
         addBtn.innerHTML = `
@@ -97,8 +98,6 @@ const addColumn = () => {
 
         cardInput.placeholder = 'Карточка ...'
         titleInput.value = input.value
-
-        deleteButton.innerText = 'X'
 
         //добавляем элементы
         titleDiv.append(titleInput)
@@ -170,11 +169,14 @@ const addCard = (form) => (e) => {
     description.innerText = ''
     description.classList.add('none')
 
-    deleteButton.innerText = 'X'
     deleteButton.classList.add('deleteCard')
+    deleteButton.classList.add('btn-close')
 
     newCard.classList.add('list__item')
     newCard.draggable = true
+
+    cardTitle.dataset.bsToggle = 'modal'
+    cardTitle.dataset.bsTarget = '#menuContainer'
 
     cardTitle.textContent = input
     cardTitle.classList.add('cardTitle')
@@ -239,7 +241,7 @@ const deleteCardOnLoad = () => {
 const showMenu = (card) => async (e) => {
   let card_id = parseInt(card.parentNode.id)
 
-  const menuContainer = document.querySelector('.menuContainer')
+  const menuContainer = document.querySelector('.modal')
   const form = menuContainer.querySelector('.popUpForm')
   const menuTitle = form.querySelector('.menuTitle')
   const descCard = form.querySelector('.popUpArea')
@@ -268,23 +270,7 @@ const showMenu = (card) => async (e) => {
     }
   })
 
-  menuContainer.classList.toggle('hidden')
-
   card.parentNode.querySelector('.desc').innerText = descCard.value
-
-  //Event listeners
-  menuContainer.onclick = (e) => {
-    if (e.target.classList.contains('menuContainer')) {
-      // menuContainer.remove()
-      menuContainer.classList.toggle('hidden')
-    }
-  }
-
-  cancelButton.onclick = (e) => {
-    e.preventDefault()
-    // menuContainer.remove()
-    menuContainer.classList.toggle('hidden')
-  }
 
   form.onsubmit = popUpSave(form, card_id, menuContainer, card)
 }
@@ -504,6 +490,8 @@ const getCookie = (name) => {
 
 const popUpSave = (form, card_id, menuContainer, card) => (e) => {
   e.preventDefault()
+  var modal = bootstrap.Modal.getInstance(menuContainer)
+  // let back = document.querySelector('.modal-backdrop')
 
   const formData = new FormData(form)
 
@@ -517,7 +505,8 @@ const popUpSave = (form, card_id, menuContainer, card) => (e) => {
       }
       form.reset()
       // menuContainer.remove()
-      menuContainer.classList.toggle('hidden')
+      // back.remove()
+      modal.hide()
     })
     .catch((err) => {
       console.error(err)

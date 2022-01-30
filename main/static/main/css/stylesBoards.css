@@ -1,15 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
 
-input::-webkit-input-placeholder {
-  color: black;
+html {
+  overflow: auto;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-  font-family: 'Montserrat', sans-serif;
+input::-webkit-input-placeholder {
+  color: black;
 }
 
 h1 {
@@ -24,52 +20,10 @@ p {
   font-size: 1.55em;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1em;
-  margin-bottom: 2em;
-}
-
 body {
   background-color: #ece9ff;
-}
-
-main {
-  margin: 0px 10vw;
-}
-
-.log,
-.reg {
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.log {
-  color: #0065ff;
-  transition: 0.3s;
-}
-
-.log:hover {
-  color: #6798e2;
-  text-decoration: underline;
-  transition: 0.3s;
-}
-
-.reg {
-  color: #ece9ff;
-  background-color: #0065ff;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #0065ff;
-  transition: 0.3s;
-}
-
-.reg:hover {
-  background-color: #ece9ff;
-  color: #0065ff;
-  transition: 0.3s;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
 }
 
 .logo {
@@ -77,72 +31,45 @@ main {
   margin: 1em;
 }
 
-.container {
-  display: flex;
-  margin-bottom: 2em;
-  flex-direction: column;
-}
-
-.container-title {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 3vh;
-  text-align: center;
-}
-
-.button:hover {
-  background-color: #2461bd;
+.dropbtn {
+  color: black;
+  padding: 0.5em;
+  font-size: 16px;
+  border: 1px solid #a7bdff;
+  border-radius: 5px;
+  background: none;
   transition: 0.3s;
 }
 
-.form-errors {
-  margin: 0.5em;
-  margin-left: 2.5em;
-}
-
-.input-form {
-  width: 80vw;
-  max-width: 500px;
-  height: 80px;
-  margin-bottom: 1.5em;
-  border-radius: 5px;
-  border: 1px solid lightgrey;
-  box-shadow: 0px 2px 5px lightgrey;
-  padding-left: 14px;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  font-size: 20px;
-}
-
-.container-item {
-  display: flex;
-  justify-content: center;
-}
-
-.center {
-  justify-content: center;
-}
-
-.name {
-  text-decoration: none;
-  margin-right: 0;
-  color: grey;
+.mmv-btn {
+  background-color: #0065ff;
+  border-radius: 50px;
   font-weight: 500;
+  max-width: 250px;
+  width: 40vw;
+}
+.add-btn {
+  font-weight: 700;
+  background: #5aac44;
+  border: none;
+  width: 170px;
+  color: white;
+  font-size: 14px;
 }
 
-a.name:hover {
-  text-decoration: underline;
-  color: #6798e2;
+.add__board-input {
+  border: none;
+  border-radius: 5px;
+  padding-left: 10px;
+  outline: none;
+  min-height: 35px;
+  margin-right: 10px;
 }
 
-/* Тут пошли стили для boards */
-
-.app {
+.add__board {
   display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 88.5vh;
-  padding-bottom: 50px;
+  margin-left: 1em;
+  margin-bottom: 1em;
 }
 
 .boards {
@@ -154,7 +81,7 @@ a.name:hover {
   display: flex;
   flex-direction: column;
   align-self: baseline;
-  max-width: 250px;
+  max-width: 280px;
   width: 100%;
   background-color: rgb(189, 206, 255);
   margin: 0 15px;
@@ -163,67 +90,65 @@ a.name:hover {
   border-radius: 3px;
 }
 
-.add__btn {
-  height: 30px;
-  background: rgba(155, 155, 155, 0.3);
-  border-radius: 3px;
-  display: flex;
-  font-style: 12px;
-  align-items: center;
-  padding-left: 10px;
+/* .deleteBoard {
+  width: 1.4rem;
+
+  visibility: hidden;
+  height: max-content;
   color: black;
-  font-size: 12px;
-  cursor: pointer;
-  margin-left: 0.2em;
+  background: none;
   border: none;
-  transition: 0.3s;
-}
-
-.add__btn:hover {
-  transition: 0.3s;
-  background: rgba(155, 155, 155, 0.651);
-}
-
-.add__btn span {
-  font-size: 20px;
-  margin-right: 10px;
-  color: black;
-}
-
-.button {
-  transition: 0.3s;
-  padding: 1em;
-  text-decoration: none;
-  font-weight: 700;
-  text-align: center;
-
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #5aac44;
-  border: none;
-  cursor: pointer;
-  width: 170px;
-  color: white;
-  border-radius: 3px;
-  font-size: 14px;
-  margin: 0 15px;
-}
-
-.add__board {
-  display: flex;
-  margin-left: 1em;
-  margin-bottom: 1em;
-}
-
-.add__board-input {
-  border: none;
+  padding: 0.2em;
+  position: absolute;
+  top: 5%;
+  right: 0;
+  margin-right: 5px;
+  background: white;
   border-radius: 5px;
-  padding-left: 10px;
-  outline: none;
-  min-height: 35px;
-  margin-right: 10px;
+  transition: 0.3s;
+} */
+
+.deleteBoard {
+  position: absolute;
+  visibility: hidden;
+  top: 5%;
+  right: 0;
+  border-radius: 5px;
+  transition: 0.3;
+}
+
+.titleDiv {
+  position: relative;
+  transition: 0.3s;
+}
+
+.titleDiv:hover .deleteBoard {
+  visibility: visible;
+  transition: 0.3s;
+}
+
+.titleDiv .deleteBoard:hover {
+  background-color: rgba(116, 116, 116, 0.384);
+  color: black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.title {
+  background: none;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  padding: 5px;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  position: relative;
+}
+
+.title:focus {
+  outline: 1px solid rgba(92, 87, 87, 0.45);
 }
 
 .add__card {
@@ -237,20 +162,58 @@ a.name:hover {
   min-height: 20px;
 }
 
-/* .menuDescription {
-  margin-bottom: 2em;
-  line-height: 1.5em;
+.list__item {
+  background-color: #fefefe;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: center;
+  margin: 0.5em 0;
+  cursor: pointer;
+  font-size: 14px;
+  outline: auto;
+  border: none;
+  font-weight: 500;
+  outline: none;
+  position: relative;
+  transition: 0.3s;
 }
 
-.menuDescription textarea {
-  width: 100%;
-  height: 5em;
-  padding: 0.5em;
-  font-size: 1.1em;
-  outline: none;
-  border: 1px solid rgba(92, 87, 87, 0.45);
-  border-radius: 5px;
-} */
+.list__item:hover {
+  transition: 0.3s;
+  background: rgb(139, 177, 247);
+}
+
+.deleteCard {
+  visibility: hidden;
+  padding: 0.3em;
+  position: absolute;
+  top: 25%;
+  right: 0;
+  margin-right: 5px;
+  transition: 0.3s;
+}
+
+.list__item:hover .deleteCard {
+  visibility: visible;
+  transition: 0.3s;
+}
+
+.deleteCard:hover {
+  background-color: rgba(248, 245, 245, 0.952);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.none {
+  display: none;
+}
+.add__btn {
+  background-color: #88a3f1;
+  border: none;
+}
+
+/* Модальное окно */
 
 .menuTitle {
   font-weight: bold;
@@ -322,19 +285,11 @@ a.name:hover {
   display: block;
 }
 
-.btn-cancel,
-.btn-save {
-  border: none;
-  color: white;
-  border-radius: 4px;
-  padding: 0.5em;
-  cursor: pointer;
-}
-
 .btn-save {
   background-color: #5aac44;
   margin-right: 0.5em;
   transition: 0.3s;
+  border: none;
 }
 
 .btn-cancel {
@@ -352,186 +307,17 @@ a.name:hover {
   transition: 0.3s;
 }
 
-.list__item {
-  background-color: #fefefe;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  margin: 0.5em 0;
-  cursor: pointer;
-  font-size: 14px;
-  outline: auto;
-  border: none;
-  font-weight: 500;
-  outline: none;
-  position: relative;
-  transition: 0.3s;
-}
-
-.list__item:hover {
-  transition: 0.3s;
-  background: rgb(139, 177, 247);
-}
-
-.list__item button {
-  visibility: hidden;
-  height: max-content;
-  color: black;
-  background: none;
-  border: none;
-  padding: 0.3em;
-  position: absolute;
-  top: 20%;
-  right: 0;
-  margin-right: 5px;
-  transition: 0.3s;
-}
-
-.list__item:hover button {
-  visibility: visible;
-  transition: 0.3s;
-}
-
-.list__item button:hover {
-  background-color: rgba(248, 245, 245, 0.952);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.title {
-  background: none;
-  border: none;
-  border-radius: 3px;
-  width: 100%;
-  padding: 5px;
-  color: black;
-  font-weight: 500;
-  margin-bottom: 0.5em;
-  position: relative;
-}
-
-.title:focus {
-  outline: 1px solid rgba(92, 87, 87, 0.45);
-}
-
-.titleDiv {
-  position: relative;
-  transition: 0.3s;
-}
-
-.titleDiv button {
-  width: 1.2rem;
-
-  visibility: hidden;
-  height: max-content;
-  color: black;
-  background: none;
-  border: none;
-  padding: 0.3em;
-  position: absolute;
-  top: 5%;
-  right: 0;
-  margin-right: 5px;
-  background: white;
-  border-radius: 5px;
-  transition: 0.3s;
-}
-
-.titleDiv:hover button {
-  visibility: visible;
-  transition: 0.3s;
-}
-
-.titleDiv button:hover {
-  background-color: rgba(116, 116, 116, 0.384);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.menuContainer {
-  display: flex;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  width: 100%;
-  height: 100%;
-}
-
-.menu {
-  top: 0;
-  left: 0;
-  background-color: rgb(235, 235, 235);
-  width: 500px;
-  min-height: 300px;
+.modal {
   margin: auto;
-  padding: 1.2em;
-  border-radius: 4px;
 }
 
-.pk,
-.none {
-  display: none;
+.modal-dialog {
+  margin: 20vh auto;
+  width: 700px;
 }
 
-.block {
-  display: block;
-}
-
-.hidden {
-  display: none;
-}
-
-/* --------------------------Dropdown menu */
-
-.dropbtn {
-  color: black;
-  padding: 0.5em;
-  font-size: 16px;
-  border: 1px solid #a7bdff;
-  border-radius: 5px;
-  background: none;
-  transition: 0.3s;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  width: 100%;
-  display: none;
-  position: absolute;
-  right: 0;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  transition: 0.3s;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* .dropdown-content a:hover {
-} */
-
-.dropdown:hover .dropdown-content {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  transition: 0.3s;
-}
-
-.dropdown:hover .dropbtn {
-  background: #2461bd;
-  color: #ece9ff;
-  transition: 0.3s;
+.modal-content {
+  background-color: rgb(235, 235, 235);
+  width: 80vw;
+  max-width: 500px;
 }

@@ -23,7 +23,7 @@
         <div
           class="mmv-col col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mr-3 mb-3"
         >
-          <div class="card p-0 mmv-card">
+          <div id="{{b.pk}}" class="card p-0 mmv-card">
             <img
               src="{% static 'main/images/card.png' %}"
               class="card-img-top"
@@ -33,8 +33,9 @@
               <h5 class="card-title text-center">{{b.name}}</h5>
 
               <a href="{{ b.get_absolute_url }}" class="btn btn-sm btn-primary"
-                >Перейти к карточке</a
+                >Открыть</a
               >
+              <button class="btn btn-sm btn-danger btn-del">Удалить</button>
             </div>
           </div>
         </div>
@@ -45,6 +46,6 @@
   </section>
 </main>
 
-<!-- <script type="text/javascript" src={% static "main/js/main.js" %}></script> -->
+<script type="application/javascript" src={% static 'main/js/main.js' %}></script>
 
 {% endblock %}

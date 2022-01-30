@@ -212,3 +212,10 @@ def get_card(request, board_id, card_id):
 
   return JsonResponse(response)
 
+def del_board(request, board_id):
+  Board.objects.filter(pk=board_id).delete()
+  response = {
+    'data': 'true',
+  }
+  return JsonResponse(response)
+
