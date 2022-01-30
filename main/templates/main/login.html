@@ -1,18 +1,16 @@
 {% extends 'main/reg-log.html' %} {% block content %}
+<div class="col-12">
+  <form method="post">
+    {% csrf_token %}
 
-<div class="container-item">
-  <form method="post" >
-    {% csrf_token %} 
-    
     <div class="form-errors">{{form.non_field_errors}}</div>
-    
+
     {% for f in form %}
     <p>{{f}}</p>
-    
+
     <div class="form-error">{{ f.errors }}</div>
     {% endfor %}
-  <button type="submit" class="reg">{{cardBtn}}</button>
-
+    <button type="submit" class="btn btn-success reg">{{cardBtn}}</button>
   </form>
 </div>
 
