@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trello</title>
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'main/css/styles.css' %}" />
     <link
       rel="shortcut icon"
@@ -16,40 +17,48 @@
   </head>
   <body>
     <header>
-      <div class="header-item">
+      <div class="navbar p-3">
         <a href="{% url 'home' %}">
           <img
             src="{% static 'main/images/logo.png' %}"
             alt="logo"
-            class="logo"
+            class="d-block float-left logo"
           />
         </a>
-      </div>
+        {% if request.user.is_authenticated %}
+        <div class="btn-group float-right mr-3">
+          <button
+            type="button"
+            class="btn btn-primary dropdown-toggle dropbtn"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ user.username }}
+          </button>
 
-      <div class="header-item">
-
-        {% if request.user.is_authenticated %} 
-        <div class="dropdown">
-          <button class="dropbtn">{{ user.username }}</button>
-          <div class="dropdown-content">
-            <a class="name" href="{% url 'main' %}">Доски</a>
-            <a class="log" href="{% url 'logout' %}">Выйти</a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="{% url 'main' %}">Доски</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+            </li>
+          </ul>
+          {% else %}
+          <div class="justify-content-end">
+            <a class="log mx-2" href="{% url 'login' %}">Войти</a>
+            <a class="btn btn-primary  reg" href="{% url 'register' %}">Регистрация</a>
           </div>
+          
+          {% endif %}
         </div>
-
-
-        <!-- <a class="name" href="{% url 'main' %}">{{ user.username }}</a> | <a class="log" href="{% url 'logout' %}">Выйти</a> -->
-        {% else %}
-        <a class="log" href="{% url 'login' %}">Войти</a>
-        <a class="reg" href="{% url 'register' %}">Регистрация</a>
-        {% endif %}
       </div>
     </header>
 
-    <main>
-      <section>
-        <div class="container">
-          <div class="container-item text">
+    <section>
+      <div class="container pt-7 pb-6">
+        <div class="row align-items-center">
+          <div class="col-lg-6 col-12 text-center text-lg-start">
             <h1>Trello помогает командам эффективно решать рабочие задачи.</h1>
             <p>
               Работайте в команде, управляйте проектами и выводите
@@ -57,51 +66,62 @@
               вместе с Trello.
             </p>
           </div>
-          <div class="container-item">
+          <div class="d-lg-block col-lg-6 d-none text-center">
             <img
               src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/spirit/hero/6a3ccd8e5c9a0e8ebea4235d12da6b24/hero.png"
               alt="img1"
-              class="side-img"
+              class="img-fluid mx-auto mmv-img"
             />
           </div>
         </div>
-        <div class="container">
-          {% if request.user.is_authenticated %}
-          <a href="{% url 'main' %}" class="button">
-            Попробовать бесплатно!
-          </a>
-        {% else %}
-        <a href="{% url 'register' %}" class="button">
-          Попробовать бесплатно!
-        </a>
-        {% endif %}
+        <div class="row">
+          <div class="col-12 justify-content-center text-center">
+            {% if request.user.is_authenticated %}
+            <a
+              href="{% url 'main' %}"
+              class="btn btn-lg btn-primary mt-md-5 mmv-btn text-center"
+            >
+              Попробовать бесплатно!
+            </a>
+            {% else %}
+            <a
+              href="{% url 'register' %}"
+              class="btn btn-lg btn-primary mt-5 mmv-btn text-center"
+            >
+              Попробовать бесплатно!
+            </a>
+            {% endif %}
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section>
-        <div class="container column">
-          <div class="conatiner-item text">
+    <section>
+      <div class="container mt-5">
+        <div class="row text-center">
+          <div class="col-12">
             <h2>Это не просто работа. Это координация действий в команде.</h2>
-            <p>
+            <p class="text-muted">
               Начните с досок, колонок и карточек, а затем переходите к более
               сложным функциям. Управляйте проектами, упорядочивайте задачи и
               поддерживайте командный дух — все это в Trello.
             </p>
           </div>
-
-          <div class="container-item">
+          <div class="col-12">
             <img
               src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/spirit/product/89d378b845766a8f0c48e955336266f8/board.png"
               alt="img2"
-              class="full-width"
+              class="full-width img-fluid"
             />
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section>
-        <div class="container">
-          <div class="conatiner-item text">
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 text-center text-md-start">
             <h2>Функции для эффективной командной работы.</h2>
             <p>
               Продуктивность команды зависит от эффективных инструментов и
@@ -111,69 +131,76 @@
             </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section>
-        <div class="container">
-          <div class="container-item card">
+    <section>
+      <div class="container">
+        <div class="row align-items-center text-center text-md-end">
+          <div class="col-md-5">
             <img
               src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/spirit/features/5f90e4a913ac52092f2ac7ff308c45c4/view.svg"
               alt="card1"
-              class="side-img"
+              class="img-fluid"
             />
           </div>
-          <div class="container-item text">
+          <div class="col-md-7 mt-3">
             <h2>Доска — это только начало</h2>
-            <p>
+            <p class="text-muted">
               Колонки и карточки — это фундамент работы на досках Trello. Вы
               также можете назначать задачи, назначать и отменять дату
               выполнения.
             </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section>
-        <div class="container">
-          <div class="container-item card text">
+    <section>
+      <div class="container">
+        <div class="row align-items-center text-center text-md-start">
+          <div class="col-md-5 order-md-2">
+            <img
+              src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/spirit/features/b845022d8d738ba8fa5e8b293e434149/card-back.svg"
+              alt="card2"
+              class="img-fluid"
+            />
+          </div>
+          <div class="col-md-7 mt-3">
             <h2>На карточках есть всё что нужно</h2>
-            <p>
+            <p class="text-muted">
               Карточки Trello помогут эффективно организовывать работу:
               отслеживайте задачи, а также управляйте ими и делитесь информацией
               с участниками команды. Чтобы увидеть все доступные функции —
               списки задач, даты выполнения, вложения откройте любую карточку.
             </p>
           </div>
-          <div class="container-item">
-            <img
-              src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/spirit/features/b845022d8d738ba8fa5e8b293e434149/card-back.svg"
-              alt="card2"
-              class="side-img"
-            />
-          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section>
-        <div class="container column last">
-          <div class="container-item">
+    <section>
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-12">
             <h2>
               Зарегистрируйтесь и начните работать с Trello уже сегодня. Мы
               поможем сделать командную работу продуктивной!
             </h2>
           </div>
-          <div class="container last">
+        </div>
+        <div class="row justify-content-center text-center">
+          <div class="col-12 mt-3">
             {% if request.user.is_authenticated %}
-            <a href="{% url 'main' %}" class="button">Регистрация</a>
+            <a href="{% url 'main' %}" class="btn btn-large btn-primary mmv-btn btn-lg">Регистрация</a>
           </div>
         {% else %}
-        <a href="{% url 'register' %}" class="button">Регистрация</a>
+        <a href="{% url 'register' %}" class="btn btn-large btn-primary mmv-btn btn-lg">Регистрация</a>
           </div>
-        {% endif %}
-
-          </div>
+        {% endif %}</div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+    <script type="application/javascript" src={% static "../../static/main/js/bootstrap.bundle.min.js" %}></script>
   </body>
 </html>
