@@ -65,14 +65,21 @@ body {
 .reg {
   background-color: #5aac44;
   font-weight: 700;
-  width: 80vw;
-  max-width: 500px;
-  height: 60px;
+  border: none;
 }
 
 .reg:hover {
   background-color: rgb(75, 201, 75);
   transition: 0.3s background-color;
+}
+
+.log {
+  text-decoration: none;
+}
+
+.log:hover {
+  color: #6798e2;
+  text-decoration: underline;
 }
 
 .mmv-h2 {
